@@ -1,0 +1,226 @@
+Todo:
+Prepare backend skills written in resume
+electron
+capacitor
+
+difference between lazy loading and dynamic import
+Shadow dom
+React vs next
+Sentry
+core web vitals
+Css modules vs scss modules
+Ec2, container , lambda function
+
+how old versions of docs is maintained
+how submissions are stored in leetcode/gfg
+I added a mobile number in my mobile device, when i opened whatsapp in mac browset, it had that contact. how?
+QR based login, message stored?
+
+System design:
+google docs
+google calendar
+
+
+how to check performance metrics
+requestIdleCallback
+
+
+notes on res hints, img opt
+how do we inline critical css
+
+
+Google warmup interview
+What are circular references in object
+KMP
+TOH visualizer
+flight path question
+Word-Guess (Wordle-like) game UI
+
+
+
+How do you debug when a feature works on one browser but fails on another?
+https://www.youtube.com/watch?v=XU6O4ASQoWs
+
+Follow-up: useEffect hook inside a dynamic form caused stale validation values, how do you fix this?
+DOM contains(parent, child) polyfill
+
+Important polyfills: https://topmate.io/arunm/787157 
+
+Todo:
+Advanced polyfills
+DSA -> Cache, Graph cycle detection
+Notes
+e-commerce example
+CRP
+output questions
+Know about Tekion
+
+
+Twilio
+Candidates report questions like “Design a world map app that adds pins in real time as users sign up”reddit.com. Backend-style design questions are also possible. For example, a backend SDE candidate outlined questions like “Design a multi-tenant messaging platform (Twilio-like SMS/MMS service)” or “Design a scalable call-routing system”codinginterview.comcodinginterview.com, which indicate the level of thinking expected (even if a FE role might focus more on client-side aspects).
+
+Hiring manager:
+
+//entire funnel flow / redbus flow
+//current project -> responsive design,  tech -> rtk query, hld , lld
+//my role & resp in project , seat layout till payment
+//technical design of project
+//ejs template engine
+//solid principles
+
+
+
+How would you organize a large React app?
+
+How do you design for reusability & separation of concerns?
+
+Explain feature-based architecture
+
+How do you handle API errors globally?
+
+How would you build a seat layout or offer module?
+
+How would you cache co-traveller data across sessions?
+
+How to optimize frontend for a high-traffic page?
+
+When to use interfaces vs types
+
+Web Workers
+rem, em, vh, vw
+
+What are stale closures in React, and how would you prevent them in a setInterval inside a useEffect
+
+How would you type the props of a functional React component with optional title and required items: string[]
+(Expected: interface Props { title?: string; items: string[] })
+
+Q6: "Can you explain what createSlice does under the hood and what Immer's role is?"
+
+Q7: "Say you have a fetchUsers async thunk — how do you handle the loading, error, and success states in your slice?”
+
+🔹 5. Architecture Thinking
+
+Q8: "You mentioned building a seat layout and offer module. How did you structure those components and manage reusability?"
+
+(Look for feature-driven folder structure, separation of logic/UI, passing props from parent.)
+
+Q9: "Let’s say the seat layout page has multiple API calls. How would you manage error boundaries and fallback UIs?”
+
+“You mentioned working on the seat layout for WhatsApp funnel. Could you walk me through how you structured the layout logic and handled responsiveness, especially for double-decker or variable-width buses?”
+
+“Let’s say your seat layout page was lagging due to large DOM size. What steps would you take to identify and fix performance bottlenecks?”
+
+(Expect: DevTools, react-window, avoiding re-renders, profiling, etc.)
+
+
+
+“How would you structure your React app if multiple teams were working on the same frontend? How do you ensure modularity and scalability?”
+
+“If I asked you to refactor one of your existing modules for better scalability, which would it be and why?”
+
+“In Redux Toolkit, explain how createSlice and createAsyncThunk work together. When would you choose one thunk per slice vs sharing thunks globally?
+
+“You mentioned using Web Workers. What was your use case? How did you connect the worker with your main React component?”
+
+“If I ask you to scale the UI of your project for 10x more users or more product teams — what would you improve in your current architecture?”
+
+Can you walk me through how a React component renders 
+Type ques like : best way to type a ref to an HTML element
+Axios vs fetch differences
+
+Retry mechanism or error fallback
+
+Webpack: role of loaders and plugins
+
+Jenkins: pipeline overview (from your resume)
+
+GitLab: branching strategy, PR reviews
+
+
+Redux Toolkit: createSlice, createAsyncThunk, middleware
+
+
+1. Walk me through your experience and the projects you've worked on.
+2. Share a challenging task you faced and how you solved it.
+3. Which version of ReactJS are you currently using?
+4. What is a loadable component in React?
+5. How do you create and hydrate routes in a React app?
+6. Design an authentication & authorization system for a multi-role web application.
+7. Can you explain the different types of lifecycle methods in React, and also elaborate on what dynamic routing is and how it's implemented?
+8. Difference between class and functional components in React.
+9. Sort this array naturally:
+ ['A1', 'A10', 'A11', 'A12', 'A2', 'A3', 'A4', 'B10', 'B2', 'F1', 'F12', 'F3']
+ Expected output: ['A1', 'A2', 'A3', 'A4', 'A10', ...]
+10. What is a custom hook in React? Use case and syntax?
+11. How do process.nextTick() and setImmediate() work in Node.js?
+12. Why should API routes be kept in separate files, beyond just code maintainability?
+13. How do you write unit tests for core business logic?
+14. When should you use SQL vs NoSQL databases?
+15. What is a serverless application and when would you use it?
+
+
+
+
+
+Mentioned in Resume	Likely Follow-up Question
+seat layout for WhatsApp funnel	How did you handle responsiveness and performance?
+Web Workers	What problem did they solve? How were they set up?
+A/B testing	What tool/library? How did you measure success?
+Redux Toolkit	How do slices & async thunks work together?
+Offer module
+
+
+
+How did you make it config-driven?
+
+
+
+
+build min and max heap , heap sort 
+last parent node is at idx -> n/2
+Linked list / binary tree from scratch
+ques:
+
+React element > react component
+cycle detection
+
+How you measure internet speed
+redux and context api hands on
+
+Get server side props (Next’s) will never ask if not used next’s
+how context api works internally? How can you prevent re renders while using context api
+
+how preload, srcset, webp, webm optimizes performance?
+
+how you handle responsive designs
+
+JS vs TS -> in depth
+Context api
+
+Table
+difference between import and require
+
+ usereducer -> re render link
+ forward ref
+ diff context api and redux
+
+forms
+promise polyfill
+css animation
+css selectors
+Flexbox, grid
+
+
+how to reduce CRP
+SOLID principles 
+Design Patterns
+
+ques on this keyword
+container queries
+make a lazy loading  reusable comp
+function to measure performance of a sync/async function
+
+-Build a registration form using React
+-Set up an Express server
+-Send and process the form data on the backend
+

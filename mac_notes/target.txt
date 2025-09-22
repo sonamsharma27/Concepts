@@ -1,0 +1,32 @@
+Target companies:
+
+Google
+Tekion
+
+Intuit
+Harness
+Twilio
+Amazon
+Navi
+Hackerrrank
+
+Apple
+meta
+Uber
+Microsoft
+Acko
+Jio Hotstar
+
+
+Glean
+Snowflake
+Databricks
+New Relic
+Rippling
+Airbnb
+Atlassian
+Stripe
+confluent
+Postman
+
+Vercel
