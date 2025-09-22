@@ -1,0 +1,311 @@
+Why Component-Based Architecture?
+Scalability: Split large UI into manageable units
+
+Maintainability: Isolate bugs and features
+
+Testability: Unit test each component separately
+
+Performance: Efficient rendering with VDOM or reactive systems
+
+| Aspect      | Imperative                                   | Declarative                    |
+| ----------- | -------------------------------------------- | ------------------------------ |
+| Approach    | How to do things                             | What the UI should be          |
+| Example     | DOM APIs (`appendChild`, `addEventListener`) | JSX in React, templates in Vue |
+| Control     | Developer manually updates UI                | Framework handles updates      |
+| Maintenance | Harder, more verbose                         | Easier to scale                |
+
+
+| Feature          | Props                             | State                                  |
+| ---------------- | --------------------------------- | -------------------------------------- |
+| **What is it?**  | Read-only data passed from parent | Internal data managed within component |
+| **Mutable?**     | ❌ Immutable in child              | ✅ Mutable via `setState`/`useState`    |
+| **Who sets it?** | Parent component                  | The component itself                   |
+| **Use case**     | Customize behavior of a component | Track user interactions, UI changes    |
+
+
+| Feature          | Controlled                         | Uncontrolled        |
+| ---------------- | ---------------------------------- | ------------------- |
+| Value source     | React `state`                      | DOM (`ref`)         |
+| Change handling  | `onChange` + `setState`            | `ref.current.value` |
+| Use case         | Form validation, conditional logic | Simple input forms  |
+| Performance      | More re-renders                    | Fewer re-renders    |
+| Setup complexity | Slightly more setup                | Minimal setup       |
+
+
+ Your team notices performance issues when typing in a very large form. What might be the reason? How would you fix it?
+
+🔑 Expected Answer:
+Controlled components can cause frequent re-renders
+Optimize by debouncing state updates or use uncontrolled components with ref for fields that don’t need live validation
+
+
+
+Nginx is:
+
+A web server: serves HTML, CSS, JS, images, etc.
+
+A reverse proxy: forwards client requests to backend services.
+
+A load balancer: distributes traffic across multiple backend servers.
+
+A caching layer: reduces repeated processing for static/dynamic content.
+
+
+Webpack is a module bundler. It takes your JavaScript, CSS, images, and other assets and bundles them into optimized files for deployment.
+
+Why Webpack is Used
+Converts ES6+, JSX, TypeScript into browser-compatible code
+Combines multiple files/modules into fewer output files (e.g., bundle.js)
+Optimizes assets (minifies JS/CSS, compresses images)
+Supports dynamic imports, lazy loading
+Enables modern workflows like HMR (Hot Module Replacement)
+
+| Feature                          | Purpose                                           |
+| -------------------------------- | ------------------------------------------------- |
+| **Tree shaking**                 | Remove unused code (dead code elimination)        |
+| **Code splitting**               | Split large bundle into smaller chunks            |
+| **Hot Module Replacement (HMR)** | Live updates without full page reload             |
+| **Caching**                      | Uses `contenthash` in filenames to enable caching |
+| **Aliasing**                     | Simplify long import paths                        |
+
+
+Main parts of webpack: entry, output, module.rules, plugins, mode.
+
+What is the difference between a loader and a plugin in Webpack?
+Loaders transform files (like Babel, CSS).
+Plugins extend or hook into Webpack’s core (e.g., HtmlWebpackPlugin, CleanWebpackPlugin).
+
+What is tree shaking and how does Webpack do it?
+Removes unused exports using ES6 module syntax in production mode.
+
+How do you implement code splitting?
+Dynamic imports (import()), SplitChunksPlugin, or multiple entry points.
+
+What is lazy loading and how can you configure it?
+Use dynamic import() in code. Webpack automatically creates separate chunks.
+
+What is the purpose of contenthash in output filenames?
+Enables long-term caching by changing filenames only when content changes.
+
+How does Hot Module Replacement (HMR) work in Webpack?
+Updates changed modules in-place without full reload.
+
+
+The module.rules array tells Webpack how to handle different file types. 
+Each rule matches a file pattern and assigns a loader (or multiple loaders) to process it.
+module: {
+  rules: [
+    { 
+      test: /\.js$/, 
+      use: 'babel-loader', 
+      exclude: /node_modules/ 
+    },
+    {
+      test: /\.css$/, 
+      use: ['style-loader', 'css-loader'] 
+    },
+    {
+      test: /\.(png|svg|jpg|gif)$/, 
+      type: 'asset/resource' 
+    }
+  ]
+}
+
+Loaders transform files that are not JavaScript into modules Webpack can understand.
+| Feature         | Description                                 |
+| --------------- | ------------------------------------------- |
+| Purpose         | Convert non-JS files to JS modules          |
+| Examples        | `babel-loader`, `css-loader`, `file-loader` |
+| Config Location | Inside `module.rules`                       |
+| File Types      | JS, TS, CSS, SCSS, images, fonts, etc.      |
+
+
+Plugins extend Webpack’s core capabilities. They can:
+
+Minify output
+Inject assets into HTML
+Clean build folders
+Define environment variables
+| Feature         | Description                                               |
+| --------------- | --------------------------------------------------------- |
+| Purpose         | Tap into Webpack lifecycle (build, emit, etc.)            |
+| Examples        | `HtmlWebpackPlugin`, `CleanWebpackPlugin`, `DefinePlugin` |
+| Config Location | Inside `plugins` array                                    |
+| File Types      | Any (plugins are not tied to specific file types)         |
+
+
+Transpilation is the process of converting code written in one version or dialect of a language into another version that's functionally equivalent — typically so that it can run in different environments.
+
+In the context of frontend development, transpilation usually refers to converting modern JavaScript (ES6+ / JSX / TypeScript) into older JavaScript (ES5) that browsers can understand.
+Babel: For converting ES6+, JSX → ES5
+
+
+
+SSR -> renderToString() or renderToPipeableStream()
+Unlike renderToString() (which renders everything before sending),
+renderToPipeableStream() streams the HTML chunks as they’re generated — allowing faster first-byte delivery and progressive rendering
+
+
+SSG stands for Static Site Generation. It’s a method where HTML pages are pre-rendered at build time, not at request time.
+That means the page is generated once during deployment and then served as-is for every user — just like plain HTML pages.
+
+⚙️ How SSG Works
+You run a build command (npm run build).
+The framework (e.g., Next.js) renders all pages to static HTML using available data.
+These pages are deployed to a CDN or server.
+When a user visits, the pre-built HTML is served instantly — no server computation.
+
+
+| Feature     | SSR (Server-Side Rendering)            | SSG (Static Site Generation)                   |
+| ----------- | -------------------------------------- | ---------------------------------------------- |
+| Render Time | On each request (real-time)            | At build time                                  |
+| Performance | Slower (dynamic generation)            | Faster (pre-rendered HTML)                     |
+| Hosting     | Requires Node.js server                | Can be hosted on static CDNs (Netlify, Vercel) |
+| SEO         | Good                                   | Great                                          |
+| Use Case    | Dynamic content (e.g., user dashboard) | Static content (e.g., blog, landing page)      |
+| Example     | `getServerSideProps` in Next.js        | `getStaticProps` in Next.js                    |
+
+
+
+ISR stands for Incremental Static Regeneration. 
+It is a hybrid approach between Static Site Generation (SSG) and Server-Side Rendering (SSR) — introduced in Next.js.
+With ISR, pages are generated at build time (like SSG), but can also be updated in the background at runtime without rebuilding the whole site.
+
+This allows:
+
+Blazing-fast static performance
+Fresh data without full redeploys
+Control over when pages revalidate
+
+| Feature     | Benefit                            |
+| ----------- | ---------------------------------- |
+| Performance | Pages are pre-rendered and cached  |
+| Freshness   | Pages update after a set interval  |
+| Scalability | No server-side bottlenecks         |
+| SEO         | Pre-rendered HTML served instantly |
+
+⚙️ How ISR Works
+Page is pre-rendered at build using getStaticProps.
+
+When a user visits:
+If cached page is fresh, serve it instantly.
+If revalidation time has passed, the next request triggers regeneration.
+The new version is cached and served to all future users.
+
+| Feature       | SSG                   | SSR                     | ISR                                      |
+| ------------- | --------------------- | ----------------------- | ---------------------------------------- |
+| When Rendered | At build time         | On every request        | At build time + revalidated periodically |
+| Performance   | Fast                  | Slower                  | Fast                                     |
+| Freshness     | Static until redeploy | Always fresh            | Fresh after revalidation                 |
+| Hosting       | Static hosting        | Requires Node.js server | Static-compatible (with revalidation)    |
+
+
+Serving critical css using plugin which reads css from entry css files - > output file is created for critical css and then it is injectd into ejs using injectAssetPlugin
+
+
+🔧 How CORS Works
+When a cross-origin request is made, the browser:
+Sends a preflight request (OPTIONS) if necessary.
+Waits for the server to respond with CORS headers like:
+Access-Control-Allow-Origin: https://frontend.com
+Access-Control-Allow-Methods: GET, POST
+Access-Control-Allow-Headers: Content-Type
+If these headers allow the request, the browser proceeds; otherwise, it blocks the response.
+
+
+✅ What Are Progressive Web Apps (PWAs)?
+Progressive Web Apps (PWAs) are web applications that use modern browser features to deliver an experience similar to native mobile apps — while still running in the browser.
+
+| Feature           | Description                                                         |
+| ----------------- | ------------------------------------------------------------------- |
+| **Progressive**   | Works for every user, regardless of browser — enhanced if supported |
+| **Responsive**    | Fits desktop, mobile, tablet                                        |
+| **Offline-first** | Can work offline using **Service Workers**                          |
+| **App-like**      | Feels like a native app (fullscreen, navigation)                    |
+| **Installable**   | Can be **installed to home screen** without App Store               |
+| **Secure**        | Served over HTTPS                                                   |
+| **Fresh**         | Updates in background using Service Worker                          |
+| **Linkable**      | Easily shared via URL                                               |
+
+
+⚙️ Core Technologies Behind PWAs
+Service Workers – JavaScript that runs in the background to:
+
+Cache assets and pages
+Serve content offline
+Handle background sync and push notifications
+
+Web App Manifest – A JSON file (manifest.json) that defines:
+
+App name, icons, theme color
+
+How the app should launch (standalone, fullscreen, etc.)
+
+HTTPS – Mandatory for service worker security
+
+
+| Benefit              | Why it Matters               |
+| -------------------- | ---------------------------- |
+| Offline support      | Useful for flaky/no internet |
+| Low friction install | No app store needed          |
+| Fast loading         | Pre-cached and lightweight   |
+| Re-engagement        | Push notifications supported |
+| Low storage usage    | Smaller than native apps     |
+
+
+
+| Feature                    | **JavaScript (JS)**                | **TypeScript (TS)**         
+                          |
+| **Type System**            | Dynamic (types checked at runtime) | Static (types checked at compile time)                  |
+| **Compilation**            | Interpreted directly by browser    | Compiled to JS using `tsc` (TypeScript compiler)        |
+| **Type Safety**            | No type safety                     | Catches type errors before runtime                      |
+| **Learning Curve**         | Easier to start with               | Requires understanding of types and interfaces          |
+| **Tooling**                | Basic code editor support          | Excellent autocompletion, refactoring, IntelliSense     |
+| **Error Detection**        | Errors found only at runtime       | Catches errors at compile time                          |
+| **ESNext Support**         | Supports modern JS features        | Supports all JS + ESNext + additional features          |
+| **Optional Static Typing** | No                                 | Yes (you can add types as needed)                       |
+| **Popular Usage**          | Vanilla JS apps, quick prototypes  | Large-scale apps, Angular, React (for enterprise-level) |
+| **Browser Compatibility**  | Native browser support             | Needs transpilation to JS (`tsc`)                       |
+
+
+✅ What is a Single Page Application (SPA)?
+A Single Page Application (SPA) is a web app that loads a single HTML page and dynamically updates the content without refreshing the page — using JavaScript (usually with a framework like React, Angular, or Vue).
+
+🎯 How SPAs Work
+Initial load: Browser loads a minimal HTML page + JavaScript bundle.
+
+Routing is handled client-side: URL changes are managed by JavaScript (e.g., react-router).
+
+AJAX/fetch requests: Data is loaded asynchronously via APIs — no full-page reloads.
+
+DOM is updated dynamically using the Virtual DOM or direct DOM manipulation.
+
+There’s no page refresh in a Single Page Application (SPA) because the JavaScript code running in the browser handles everything on the client side — including rendering content and routing between pages.
+
+Concept	Explanation
+Client-Side Routing	Tools like react-router, vue-router, or custom JS intercept link clicks and change the view without reloading.
+History API	JavaScript uses history.pushState() to update the URL without triggering a page reload.
+Dynamic DOM Updates	JavaScript updates just the parts of the DOM that need to change — no need to reload the whole page.
+AJAX / Fetch Calls	Data is loaded from the backend via fetch() or axios, without reloading the full HTML.
+JavaScript Bundling	All logic (views, logic, routes) is bundled and loaded up front (or lazily loaded later).
+
+
+✅ What is a Multi-Page Application (MPA)?
+A Multi-Page Application (MPA) is a traditional web architecture where each page is a separate HTML file. Navigating between pages causes a full page reload, and the browser requests a new document from the server every time.
+
+🧱 How MPA Works
+User visits example.com/home → Server sends home.html.
+
+User clicks "About" → Browser requests about.html → Full page reload.
+
+All scripts, styles, and data are reloaded on every navigation.
+
+MPAs are SEO-friendly, easier to manage access controls, and have faster initial loads due to page-specific resources.
+SPA uses client-side routers like react-router, while MPA uses server-side routing — the server decides which HTML to serve based on the path.
+
+What problems arise when using SPAs for large apps?
+
+SEO limitations
+Initial JS bundle size
+Complex state and route management
+Accessibility issues if not handled properly

@@ -1,0 +1,65 @@
+🔁 Webpack Lifecycle Overview
+
+Initialization → Compilation → Build Modules → Seal → Emit
+
+🔧 1. Initialization
+Webpack reads your webpack.config.js
+
+Creates a compiler instance
+
+Applies plugins (compiler.apply() or apply(compiler))
+
+🧪 2. Compilation
+Starts compiling the entry points
+
+Triggers compiler.hooks.run or compiler.hooks.watchRun
+
+Creates a compilation object for this build
+
+Applies loaders & plugins at compilation level
+
+📦 3. Build Modules
+Resolves all modules (starting from the entry)
+
+Runs through all loaders for each file
+
+Parses, transforms, and links dependencies (JS, CSS, images, etc.)
+
+🔒 4. Seal the Compilation
+Webpack finalizes the list of modules and chunks
+
+Optimizations happen here (tree shaking, code splitting, etc.)
+
+Calls compilation.seal() — closes off further changes
+
+💾 5. Emit Assets
+Webpack generates the final assets (JS, CSS, etc.)
+
+Calls compiler.hooks.emit
+
+Writes them to output.path
+
+Triggers compiler.hooks.done after writing
+
+
+
+🔌 Related Hooks (used in plugins)
+
+| Hook Name                       | Lifecycle Phase             |
+| ------------------------------- | --------------------------- |
+| `compiler.hooks.run`            | Start of build              |
+| `compiler.hooks.compile`        | Before compiling            |
+| `compilation.hooks.buildModule` | Before each module is built |
+| `compilation.hooks.seal`        | When sealing chunks         |
+| `compiler.hooks.emit`           | Before writing files        |
+| `compiler.hooks.done`           | Build complete              |
+
+
+| Phase          | Key Activities                   |
+| -------------- | -------------------------------- |
+| Initialization | Read config, apply plugins       |
+| Compilation    | Resolve modules and dependencies |
+| Build Modules  | Transform files using loaders    |
+| Seal           | Optimize and finalize build      |
+| Emit           | Write output files to disk       |
+

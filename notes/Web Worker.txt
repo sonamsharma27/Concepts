@@ -1,0 +1,57 @@
+🔹 1. The Problem They Solve
+
+JS in browsers is single-threaded (event loop model).
+Long-running tasks (e.g., parsing JSON, image processing, crypto) block the main thread → UI freezes.
+Web Workers offload that work to another thread.
+
+🔹 2. How They’re Implemented Internally
+
+(a) Thread Creation
+When you create a worker (new Worker("worker.js")), the browser spawns a separate background thread.
+This thread runs in a separate global context (no window, document, or DOM access).
+Instead, it has its own event loop just like the main thread, but isolated.
+
+(b) Message Passing (PostMessage API)
+Communication happens via the structured clone algorithm (deep copy of objects without references).
+
+Example:
+worker.postMessage({ a: 1 });
+worker.onmessage = (e) => console.log(e.data);
+
+
+Under the hood:
+Browser serializes the object (structured clone).
+Sends it through an internal channel (like an OS-level message queue or thread-safe queue).
+Worker thread deserializes it and enqueues in its own event loop.
+For large data, browsers use Transferable Objects (like ArrayBuffer) → memory is moved, not copied.
+
+(c) Execution Model
+Each worker runs its own event loop:
+Wait for messages from main thread.
+Process events (timers, fetch, computations).
+Send results back with postMessage.
+Workers don’t share memory directly (to avoid race conditions).
+⚡ But with SharedArrayBuffer + Atomics, controlled shared memory is possible.
+
+(d) Thread Lifecycle
+Workers run until you call worker.terminate() or the page unloads.
+They don’t get paused when the tab is backgrounded (unlike timers in main thread, which may be throttled).
+
+🔹 3. Browser + OS Involvement
+Browser maps a JS worker thread → native OS thread (via the JS engine, e.g., V8 in Chrome).
+Scheduling is handled by the OS kernel’s thread scheduler.
+Workers communicate through internal event queues, not shared call stacks.
+
+🔹 4. Simplified Analogy
+Think of it like:
+Main Thread → Project Manager (handles UI + delegations).
+Web Worker → Worker in another office.
+Communication → Email system (messages copied or transferred).
+Worker can’t directly touch office furniture (DOM). Only manager can.
+
+🔹 5. Key Limitations
+No direct DOM access (because DOM is not thread-safe).
+Extra memory cost (each worker loads its own JS runtime environment).
+Too many workers → Thread overhead > Performance gain.
+
+👉 So internally: A Worker = a separate thread with its own event loop, isolated memory, and message-passing bridge to the main thread.
