@@ -102,3 +102,196 @@ Common CDN Challenges
 - Cache misses
 - Eventual consistency
 - Cost management
+
+
+Q. How Kafka is so fast ?
+1. Zero copy technique
+    - Reads without zero copy : Disc -> OS buffer -> Kafka Application buffer -> Socket buffer -> NIC buffer -> Consumer
+    - Reads with zero copy : Disc -> OS buffer -> NIC buffer -> Consumer
+2. Uses Sequential I/O access by using append only log as data structure as it follows the same access pattern
+
+
+# Random Insertion Problem (UUIDs in B+Tree Indexes)
+
+## Core Idea
+Most relational databases (PostgreSQL, MySQL/InnoDB) use B+Trees for indexes.
+
+B+Trees store keys in sorted order.
+
+Sequential IDs (1,2,3,4...) are inserted at the right-most leaf page, which is highly efficient.
+
+Random UUIDs insert into arbitrary positions across the tree, causing major performance problems at scale.
+
+--------------------------------------------------
+
+# Sequential Insertions (GOOD)
+
+Example:
+1 → 2 → 3 → 4 → 5
+
+New inserts go to:
+- right-most leaf page
+- append-like behavior
+
+Benefits:
+- excellent cache locality
+- fewer page splits
+- fewer disk seeks
+- predictable writes
+- better buffer pool efficiency
+- lower WAL generation
+- less fragmentation
+
+DBs are heavily optimized for this pattern.
+
+--------------------------------------------------
+
+# Random UUID Insertions (BAD)
+
+UUIDs:
+c82a...
+1ff9...
+a772...
+09ab...
+
+Insertion positions become random.
+
+Problems:
+- DB touches random leaf pages
+- poor cache locality
+- more page loads into memory
+- more disk IO
+- more fragmentation
+
+--------------------------------------------------
+
+# Page Split Problem
+
+Suppose leaf page is full:
+
+[40 50 60]
+
+Insert:
+45
+
+DB must split page:
+
+Before:
+[40 50 60]
+
+After:
+[40 45]
+[50 60]
+
+Parent nodes also updated.
+
+--------------------------------------------------
+
+# Why Page Splits Are Expensive
+
+Page splits involve:
+- memory allocation
+- disk writes
+- tree rebalancing
+- pointer updates
+- WAL logging
+
+At scale:
+- write amplification increases
+- SSD wear increases
+- replication lag increases
+
+--------------------------------------------------
+
+# Cache Locality Issue
+
+Sequential IDs:
+- repeatedly reuse same hot tail pages
+- high buffer cache hit ratio
+
+UUIDs:
+- constantly touch random pages
+- lower cache efficiency
+- more cache misses
+
+--------------------------------------------------
+
+# InnoDB Clustered Index Impact
+
+In MySQL/InnoDB:
+Primary key determines physical row order.
+
+BIGINT auto-increment:
+- rows appended sequentially
+
+Random UUID PK:
+- table rows physically fragmented
+- more page splits in actual table storage too
+
+Very expensive.
+
+--------------------------------------------------
+
+# Trade-Offs of UUIDs
+
+Advantages:
+- globally unique
+- decentralized ID generation
+- shard independence
+- unguessable IDs
+- no coordination required
+
+Disadvantages:
+- larger indexes (16 bytes vs 8 bytes BIGINT)
+- poor B+Tree locality
+- random writes
+- fragmentation
+- slower inserts
+
+--------------------------------------------------
+
+# Modern Solutions
+
+Use time-ordered unique IDs:
+- UUIDv7
+- ULID
+- KSUID
+- Snowflake IDs
+
+Benefits:
+- globally unique
+- mostly sequential insertion order
+- preserve B+Tree locality
+- reduce fragmentation
+
+--------------------------------------------------
+
+# Important Deep Insight
+
+The real problem is NOT UUID itself.
+
+The real problem is:
+"random write distribution in B+Trees"
+
+Sequential insertion preserves locality.
+Random insertion destroys locality.
+
+--------------------------------------------------
+
+# LSM Tree Databases
+
+Databases like:
+- Cassandra
+- RocksDB
+
+use LSM Trees instead of B+Trees.
+
+LSM Trees optimize sequential write batching.
+
+Random UUIDs hurt much less in LSM-based systems.
+
+--------------------------------------------------
+
+# Strong Interview Summary
+
+Random UUID primary keys degrade B+Tree performance because inserts occur across arbitrary leaf pages instead of append-only tail pages. This causes page splits, fragmentation, cache misses, additional WAL generation, and poorer buffer pool efficiency. Time-ordered identifiers preserve insertion locality and significantly improve write throughput and index maintenance efficiency.
