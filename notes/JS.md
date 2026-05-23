@@ -1,3 +1,5 @@
+# JS
+
 ✅ ArrayBuffer & Typed Arrays in JavaScript
 ArrayBuffer and Typed Arrays are part of the JavaScript Binary Data API, useful for handling raw binary data — such as when dealing with files, WebSockets, or low-level protocols like WebAssembly.
 
@@ -21,13 +23,19 @@ All Typed Arrays use little-endian by default.
 | `Float64Array` | 8 bytes      | 64-bit floating point   |
 
 
+```js
 const buffer = new ArrayBuffer(4);         // 4 bytes = 32 bits
 const view = new Int32Array(buffer);       // 32-bit signed integer
+```
 
+```js
 view[0] = 42;
+```
 
+```js
 console.log(view[0]);                      // 42
 console.log(buffer.byteLength);            // 4
+```
 
 
 | Question                                                 | Type       | Concept                   |
@@ -40,19 +48,19 @@ console.log(buffer.byteLength);            // 4
 
 
 ✅ What is Client-Side Routing?
-Client-Side Routing means:
+## Client-Side Routing means:
 
 The browser does not request a new HTML page from the server on every navigation.
 Instead, JavaScript dynamically updates the view by modifying the URL and rendering components.
 It relies on the History API (pushState, replaceState) or Hash-based routing (#)
 
 ⚙️ How Client-Side Routing Works
-🔄 Traditional Server Routing:
+## 🔄 Traditional Server Routing:
 User navigates → full page reload
 
 Server sends new HTML for every route
 
-⚡ Client-Side Routing:
+## ⚡ Client-Side Routing:
 User navigates → JS intercepts route change
 URL is updated via history.pushState
 A new component/view is rendered instantly
@@ -75,22 +83,27 @@ In App Router (app/ directory), it works similarly but uses page.js and layouts.
 | How do you check browser compatibility for an API?           | Check on [MDN](https://developer.mozilla.org) or caniuse.com                  |
 
 
-
 🔧 Syntax: Creating and Dispatching a Custom Event
 
 🔹 1. Create the Event
+```js
 const event = new CustomEvent('user:login', {
   detail: { userId: 42, name: 'Sonam' },
 });
+```
 
 
 🔹 2. Listen for the Event
+```js
 document.addEventListener('user:login', (e) => {
   console.log('User logged in:', e.detail);
 });
+```
 
 🔹 3. Dispatch the Event
+```js
 document.dispatchEvent(event);
+```
 
 
 | Question                                 | Ideal Answer Summary                        |
@@ -102,8 +115,10 @@ document.dispatchEvent(event);
 | How do CustomEvents differ from Pub/Sub? | Pub/Sub uses centralized emitters/listeners |
 
 
+```js
 const [first, , third] = [10, 20, 30];
 console.log(third); // 30
+```
 
 Error Boundaries in React.js
 🧠 What Are They?
@@ -130,15 +145,19 @@ It returns a Generator object, which is an iterator — each call to .next() run
 
 
 function* generatorFunc() {
+```js
   yield 1;
   yield 2;
   return 3;
 }
+```
 
+```js
 const gen = generatorFunc();
 console.log(gen.next()); // { value: 1, done: false }
 console.log(gen.next()); // { value: 2, done: false }
 console.log(gen.next()); // { value: 3, done: true }
+```
 
 | Feature     | Description                                     |
 | ----------- | ----------------------------------------------- |
@@ -157,13 +176,17 @@ console.log(gen.next()); // { value: 3, done: true }
 
 
 function* dialogue() {
+```js
   const name = yield 'What is your name?';
   yield `Hello, ${name}`;
 }
+```
 
+```js
 const convo = dialogue();
 console.log(convo.next().value);           // 'What is your name?'
 console.log(convo.next('Sonam').value);    // 'Hello, Sonam'
+```
 
 
 globalThis is the standard, universal way to access the global object regardless of environment.
@@ -174,8 +197,10 @@ globalThis is the standard, universal way to access the global object regardless
 | Node.js  | ✅ Yes (`global`)         |
 | Workers  | ✅ Yes (`self`)           |
 
-What's the difference between var and let globally?	
+### What's the difference between var and let globally?
+```js
 var attaches to global object; let does not
+```
 
 
 ✅ 1. Prototype-Based Inheritance (Traditional JS Style)
@@ -189,7 +214,7 @@ In JavaScript, every object has a hidden [[Prototype]], which can point to anoth
 
 
 ✅ What Is Memory Management?
-Memory management in JavaScript refers to:
+## Memory management in JavaScript refers to:
 Allocating memory when variables/objects are created.
 Releasing memory that’s no longer needed — done via Garbage Collection (GC).
 JavaScript uses automatic memory management, meaning the engine (like V8) handles allocation and deallocation.
@@ -199,7 +224,7 @@ Garbage Collection is the process of finding and freeing up memory occupied by v
 
 🔍 How Does It Work?
 🔗 Reachability-Based Garbage Collection
-An object is considered reachable if:
+## An object is considered reachable if:
 
 It is in the global scope.
 It is referenced by a local variable or another reachable object.
@@ -213,7 +238,7 @@ Anything not reachable is garbage collected.
 | **Detached DOM nodes** | Removed from DOM but still in JS memory     |
 
 JavaScript engines like V8 use the Mark-and-Sweep algorithm for garbage collection.
-🔄 How it Works (Step-by-Step):
+## 🔄 How it Works (Step-by-Step):
 
 Mark Phase
 The engine starts from "roots" (e.g. global variables, active function calls).
@@ -223,7 +248,7 @@ Sweep Phase
 All unmarked objects are considered unreachable.
 These objects are then removed (freed) from memory.
 
-📌 Roots in JavaScript:
+## 📌 Roots in JavaScript:
 | Root Type         | Examples                         |
 | ----------------- | -------------------------------- |
 | Global references | `window`, `globalThis`, `global` |
@@ -231,7 +256,7 @@ These objects are then removed (freed) from memory.
 | Closures          | Enclosed variables in functions  |
 
 
-🚫 Memory Leak Scenarios (Mark-and-Sweep won’t help if...):
+## 🚫 Memory Leak Scenarios (Mark-and-Sweep won’t help if...):
 Timers not cleared (setInterval)
 Event listeners not removed from DOM
 Closures that unintentionally hold variables
@@ -247,8 +272,11 @@ Closures that unintentionally hold variables
 ECMAScript (ES) is the standard specification that defines how a scripting language like JavaScript should behave.
 Think of ECMAScript as the blueprint, and JavaScript as the real-world implementation.
 
-📦 What ECMAScript Defines:
+## 📦 What ECMAScript Defines:
+```js
 Syntax (e.g., let, const, =>)
+```
+
 Data types (Number, String, Object, etc.)
 Control structures (if, switch, for, etc.)
 Standard APIs (Math, Date, Promise)
@@ -260,23 +288,29 @@ Standard APIs (Math, Date, Promise)
 | How to convert JSON to object?         | Use `JSON.parse(jsonString)`                    |
 
 
-
 ✅ Map — Key-Value Data Structure
 A Map holds key-value pairs where any value (object, function, primitive) can be a key
 
+```js
 const map = new Map();
 map.set('name', 'Sonam');
 map.set(1, 'one');
 map.set({ a: 1 }, 'obj');
+```
 
+```js
 console.log(map.get('name')); // 'Sonam'
 console.log(map.has(1));      // true
 map.delete(1);
+```
 
+```js
 for (const [key, value] of map) {
   console.log(key, value);
 }
+```
 
+```js
 for (const key of map.keys()) {
   console.log('Key:', key);
 }
@@ -286,6 +320,7 @@ for (const value of map.values()) {
 for (const [k, v] of map.entries()) {
   console.log('Entry:', k, v);
 }
+```
 
 
 | Feature          | Description                           |
@@ -298,33 +333,48 @@ for (const [k, v] of map.entries()) {
 
 ✅ Set — Unique Value Collection
 A Set is a collection of unique values (no duplicates allowed).
+```js
 const set = new Set();
+```
 
+```js
 set.add(1);
 set.add(2);
+```
+
 set.add(1); // ignored
 
+```js
 console.log(set.has(1));   // true
 console.log(set.size);     // 2
 set.delete(2);
+```
 
+```js
 for (const value of set) {
   console.log(value);
 }
+```
 
+```js
 // ✅ 2. set.forEach()
 set.forEach(value => {
   console.log(value);
 });
+```
 
+```js
 // ✅ 3. set.values() / set.keys() / set.entries()
 for (const val of set.values()) {
   console.log('Value:', val);
 }
+```
 
+```js
 for (const entry of set.entries()) {
   console.log('Entry:', entry); // [value, value]
 }
+```
 
 
 | Feature       | Description                          |
@@ -376,20 +426,28 @@ WeakSet: A collection of objects only, also with weak references.
 | Size property?      | ❌ No `.size` or `.clear()`            | ❌ No `.size` or `.clear()` |
 
 
+```js
 const wm = new WeakMap();
 let obj = { name: "Sonam" };
+```
 
+```js
 wm.set(obj, "data");
 console.log(wm.get(obj)); // 'data'
+```
 
 obj = null; // original object is now GC eligible
 
 
+```js
 const ws = new WeakSet();
 let user = { id: 1 };
+```
 
+```js
 ws.add(user);
 console.log(ws.has(user)); // true
+```
 
 user = null; // object becomes GC eligible
 
@@ -399,7 +457,6 @@ user = null; // object becomes GC eligible
 | Metadata for DOM elements    | Store private data without memory leaks |
 | Caching / memoization        | Auto-clean cache when object is gone    |
 | Hiding internal object state | Keep private data without exposing it   |
-
 
 
 | Question                     | Answer Summary                                    |
@@ -455,10 +512,15 @@ Number.isNaN(NaN)     // true ✅
 
 RegExp
 
+```js
 const regex = /pattern/flags;
 const regexObj = new RegExp('pattern', 'flags');
+```
 
+```js
 const str = "Hello 123 hello";
+```
+
 str.match(/hello/i);           // ['Hello']
 str.match(/\d+/g);             // ['123']
 
@@ -485,7 +547,7 @@ str.match(/\d+/g);             // ['123']
 | `a?`     | 0 or 1 a                           |        |
 | `(abc)`  | Capturing group                    |        |
 
-A Service Worker is a JavaScript background script that runs separately from the web page, intercepting network requests and enabling features like:
+## A Service Worker is a JavaScript background script that runs separately from the web page, intercepting network requests and enabling features like:
 
 Offline support
 Caching
@@ -506,17 +568,23 @@ Encapsulate internal structure and logic
 
 Build truly reusable components
 
+```html
 <div id="host"></div>
+```
 
+```html
 <script>
   const host = document.getElementById('host');
   const shadow = host.attachShadow({ mode: 'open' });
+```
 
   shadow.innerHTML = `
+```html
     <style> p { color: red; } </style>
     <p>Hello from Shadow DOM</p>
   `;
 </script>
+```
 
 | Feature          | Description                                |
 | ---------------- | ------------------------------------------ |
@@ -535,7 +603,7 @@ Build truly reusable components
 
 ✅ What Are Template Literals?
 Template literals are a way to create strings in JavaScript using backticks ` instead of quotes.
-They support:
+## They support:
 
 String interpolation
 Multi-line strings
@@ -547,15 +615,21 @@ Shadowing happens when a variable declared in a local (inner) scope has the same
 
 The inner variable "shadows" the outer one — making the outer one inaccessible within that inner scope.
 
+```js
 let message = "Global";
+```
 
+```js
 function showMessage() {
   let message = "Local"; // shadows the outer `message`
   console.log(message);  // "Local"
 }
+```
 
+```js
 showMessage();
 console.log(message);    // "Global"
+```
 
 You cannot shadow let or const with var in the same scope due to temporal dead zone and scope conflict.
 
@@ -563,7 +637,9 @@ You cannot shadow let or const with var in the same scope due to temporal dead z
 ✅ What Is a Symbol?
 A Symbol is a primitive data type introduced in ES6 that represents a unique and immutable identifier.
 
+```js
 const id = Symbol("description");
+```
 
 
 Symbol("id") === Symbol("id"); // false
@@ -583,7 +659,6 @@ Keeps internal properties safe from accidental overwrite or access.
 | Why use it over strings as keys?        | To avoid key collisions and make properties hidden      |
 | Are Symbols enumerable?                 | ❌ No, they're skipped in `for...in` and `Object.keys()` |
 | Can Symbols be used for private fields? | ✅ Yes, sort of—though not truly private, they're hidden |
-
 
 
 | Context                    | Value of `this`                                  |
@@ -609,7 +684,7 @@ Keeps internal properties safe from accidental overwrite or access.
 📘 What Are They?
 Web Workers allow you to run JavaScript in the background (separate thread) without blocking the main UI thread.
 
-🧠 Use Cases:
+## 🧠 Use Cases:
 CPU-intensive tasks (e.g., image processing, data parsing)
 
 Keeping UI responsive during heavy computations
@@ -619,17 +694,22 @@ Keeping UI responsive during heavy computations
 📘 What Are They?
 WebSockets enable real-time, bidirectional communication between a client and a server over a persistent connection.
 
-🧠 Use Cases:
+## 🧠 Use Cases:
 Chat apps
 Live games
 Stock tickers
 Notifications
 
+```js
 const socket = new WebSocket("wss://example.com");
+```
 
+```js
 socket.onopen = () => socket.send("Hello server");
 socket.onmessage = (e) => console.log("From server:", e.data);
-✅ Benefits:
+```
+
+## ✅ Benefits:
 Real-time updates
 Less overhead than HTTP polling
 Full-duplex communication
@@ -647,35 +727,50 @@ Full-duplex communication
 ✅ 1. URL Object
 The URL class provides a structured way to parse, read, and manipulate URLs.
 
+```js
 const url = new URL("https://example.com:8080/path/page?query=js&lang=en#section");
+```
 
+```js
 console.log(url.protocol);  // "https:"
 console.log(url.hostname);  // "example.com"
 console.log(url.port);      // "8080"
 console.log(url.pathname);  // "/path/page"
 console.log(url.search);    // "?query=js&lang=en"
 console.log(url.hash);      // "#section"
+```
 
 ✅ 2. URLSearchParams
 Used to work with query strings (the part after ? in URLs).
 
+```js
 const params = new URLSearchParams("q=chatgpt&sort=desc");
+```
 
+```js
 console.log(params.get("q"));        // "chatgpt"
 console.log(params.has("sort"));     // true
+```
 
+```js
 params.append("page", "2");
 params.set("sort", "asc");
+```
 
+```js
 console.log(params.toString());      // "q=chatgpt&sort=asc&page=2"
+```
 
+```js
 for (const [key, value] of params) {
   console.log(key, value);
 }
+```
 
 
 📍 Geolocation API
 The Geolocation API allows web applications to access the user's location (with permission). It uses GPS, Wi-Fi, cell towers, or IP address.
+```js
 navigator.geolocation.getCurrentPosition(
   (position) => {
     console.log("Latitude:", position.coords.latitude);
@@ -685,6 +780,7 @@ navigator.geolocation.getCurrentPosition(
     console.error("Error:", error.message);
   }
 );
+```
 
 
 | Method                 | Description                               |
@@ -692,8 +788,6 @@ navigator.geolocation.getCurrentPosition(
 | `getCurrentPosition()` | Gets current location once                |
 | `watchPosition()`      | Tracks position changes continuously      |
 | `clearWatch(id)`       | Stops tracking started by `watchPosition` |
-
-
 
 
 | Feature                   | **Geolocation API (JS)**                          | **Location Services (System-Level)**                    |
@@ -712,18 +806,24 @@ SVG (Scalable Vector Graphics) is an XML-based format for drawing vector graphic
 
 <svg width="100" height="100" id="mySVG">
   <circle id="myCircle" cx="50" cy="50" r="40" fill="blue" />
+```html
 </svg>
+```
 
+```js
 const circle = document.getElementById("myCircle");
 circle.setAttribute("fill", "green");
 circle.setAttribute("r", "60");
+```
 
-Styling with CSS:
+## Styling with CSS:
 
 circle:hover {
+```js
   fill: red;
   stroke: black;
 }
+```
 
 
 | Feature       | SVG                      | Canvas                     |

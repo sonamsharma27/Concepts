@@ -1,5 +1,7 @@
+# serviceWorker
+
 🔁 1. Background Sync
-📌 Use Case:
+## 📌 Use Case:
 You're offline or have poor connectivity.
 
 User submits a form (e.g., post a comment or message).
@@ -7,7 +9,7 @@ User submits a form (e.g., post a comment or message).
 Background Sync retries the request once the connection is restored, even if the user leaves the page.
 
 ✅ How It Works
-Step-by-step:
+## Step-by-step:
 Detect offline state in your app.
 
 Queue the request in IndexedDB or memory.
@@ -17,20 +19,26 @@ Register a background sync task using serviceWorker.sync.register().
 In the sw.js, listen for the sync event and process the request.
 
 📄 Code Example
-In your main app:
+## In your main app:
 
+```js
 navigator.serviceWorker.ready.then(registration => {
   return registration.sync.register('send-message');
 });
-In sw.js:
+```
 
+## In sw.js:
+
+```js
 self.addEventListener('sync', event => {
   if (event.tag === 'send-message') {
     event.waitUntil(sendPendingMessages());
   }
 });
+```
 
 async function sendPendingMessages() {
+```js
   const messages = await getFromIndexedDB(); // assume messages are stored here
   for (const msg of messages) {
     await fetch('/api/send', {
@@ -41,8 +49,10 @@ async function sendPendingMessages() {
     await removeFromIndexedDB(msg);
   }
 }
+```
+
 🔔 2. Push Notifications
-📌 Use Case:
+## 📌 Use Case:
 You want to notify users even if the browser is closed.
 
 News, chat updates, stock alerts, etc.
@@ -55,18 +65,24 @@ Backend uses Web Push Protocol to send a push to the browser.
 Service Worker listens to push event and shows a notification.
 
 📄 Code Example
-In your main JS (register push):
+## In your main JS (register push):
 
+```js
 navigator.serviceWorker.ready.then(async registration => {
   const subscription = await registration.pushManager.subscribe({
     userVisibleOnly: true,
     applicationServerKey: '<Your VAPID Public Key>'
   });
+```
 
+```js
   // Send `subscription` to your server
 });
-In sw.js (Service Worker):
+```
 
+## In sw.js (Service Worker):
+
+```js
 self.addEventListener('push', event => {
   const data = event.data?.json() || {};
   event.waitUntil(
@@ -77,24 +93,34 @@ self.addEventListener('push', event => {
     })
   );
 });
+```
 
+```js
 self.addEventListener('notificationclick', event => {
   event.notification.close();
   event.waitUntil(
     clients.openWindow('https://yourapp.com/messages')
   );
 });
+```
+
 ✅ Backend (Node.js Example Using web-push)
 
+```js
 const webpush = require('web-push');
+```
 
 webpush.setVapidDetails(
   'mailto:you@example.com',
   VAPID_PUBLIC_KEY,
   VAPID_PRIVATE_KEY
+```js
 );
+```
 
 await webpush.sendNotification(subscription, JSON.stringify({
   title: 'New Message',
   body: 'You have 1 unread message'
+```js
 }));
+```

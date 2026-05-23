@@ -1,4 +1,6 @@
-Why Component-Based Architecture?
+# fundamentals
+
+### Why Component-Based Architecture?
 Scalability: Split large UI into manageable units
 
 Maintainability: Isolate bugs and features
@@ -34,13 +36,12 @@ Performance: Efficient rendering with VDOM or reactive systems
 
  Your team notices performance issues when typing in a very large form. What might be the reason? How would you fix it?
 
-🔑 Expected Answer:
+## 🔑 Expected Answer:
 Controlled components can cause frequent re-renders
 Optimize by debouncing state updates or use uncontrolled components with ref for fields that don’t need live validation
 
 
-
-Nginx is:
+## Nginx is:
 
 A web server: serves HTML, CSS, JS, images, etc.
 
@@ -71,28 +72,29 @@ Enables modern workflows like HMR (Hot Module Replacement)
 
 Main parts of webpack: entry, output, module.rules, plugins, mode.
 
-What is the difference between a loader and a plugin in Webpack?
+### What is the difference between a loader and a plugin in Webpack?
 Loaders transform files (like Babel, CSS).
 Plugins extend or hook into Webpack’s core (e.g., HtmlWebpackPlugin, CleanWebpackPlugin).
 
-What is tree shaking and how does Webpack do it?
+### What is tree shaking and how does Webpack do it?
 Removes unused exports using ES6 module syntax in production mode.
 
-How do you implement code splitting?
+### How do you implement code splitting?
 Dynamic imports (import()), SplitChunksPlugin, or multiple entry points.
 
-What is lazy loading and how can you configure it?
+### What is lazy loading and how can you configure it?
 Use dynamic import() in code. Webpack automatically creates separate chunks.
 
-What is the purpose of contenthash in output filenames?
+### What is the purpose of contenthash in output filenames?
 Enables long-term caching by changing filenames only when content changes.
 
-How does Hot Module Replacement (HMR) work in Webpack?
+### How does Hot Module Replacement (HMR) work in Webpack?
 Updates changed modules in-place without full reload.
 
 
 The module.rules array tells Webpack how to handle different file types. 
 Each rule matches a file pattern and assigns a loader (or multiple loaders) to process it.
+```js
 module: {
   rules: [
     { 
@@ -110,6 +112,7 @@ module: {
     }
   ]
 }
+```
 
 Loaders transform files that are not JavaScript into modules Webpack can understand.
 | Feature         | Description                                 |
@@ -120,7 +123,7 @@ Loaders transform files that are not JavaScript into modules Webpack can underst
 | File Types      | JS, TS, CSS, SCSS, images, fonts, etc.      |
 
 
-Plugins extend Webpack’s core capabilities. They can:
+## Plugins extend Webpack’s core capabilities. They can:
 
 Minify output
 Inject assets into HTML
@@ -138,7 +141,6 @@ Transpilation is the process of converting code written in one version or dialec
 
 In the context of frontend development, transpilation usually refers to converting modern JavaScript (ES6+ / JSX / TypeScript) into older JavaScript (ES5) that browsers can understand.
 Babel: For converting ES6+, JSX → ES5
-
 
 
 SSR -> renderToString() or renderToPipeableStream()
@@ -166,12 +168,11 @@ When a user visits, the pre-built HTML is served instantly — no server computa
 | Example     | `getServerSideProps` in Next.js        | `getStaticProps` in Next.js                    |
 
 
-
 ISR stands for Incremental Static Regeneration. 
 It is a hybrid approach between Static Site Generation (SSG) and Server-Side Rendering (SSR) — introduced in Next.js.
 With ISR, pages are generated at build time (like SSG), but can also be updated in the background at runtime without rebuilding the whole site.
 
-This allows:
+## This allows:
 
 Blazing-fast static performance
 Fresh data without full redeploys
@@ -187,7 +188,7 @@ Control over when pages revalidate
 ⚙️ How ISR Works
 Page is pre-rendered at build using getStaticProps.
 
-When a user visits:
+## When a user visits:
 If cached page is fresh, serve it instantly.
 If revalidation time has passed, the next request triggers regeneration.
 The new version is cached and served to all future users.
@@ -204,9 +205,9 @@ Serving critical css using plugin which reads css from entry css files - > outpu
 
 
 🔧 How CORS Works
-When a cross-origin request is made, the browser:
+## When a cross-origin request is made, the browser:
 Sends a preflight request (OPTIONS) if necessary.
-Waits for the server to respond with CORS headers like:
+## Waits for the server to respond with CORS headers like:
 Access-Control-Allow-Origin: https://frontend.com
 Access-Control-Allow-Methods: GET, POST
 Access-Control-Allow-Headers: Content-Type
@@ -229,13 +230,13 @@ Progressive Web Apps (PWAs) are web applications that use modern browser feature
 
 
 ⚙️ Core Technologies Behind PWAs
-Service Workers – JavaScript that runs in the background to:
+## Service Workers – JavaScript that runs in the background to:
 
 Cache assets and pages
 Serve content offline
 Handle background sync and push notifications
 
-Web App Manifest – A JSON file (manifest.json) that defines:
+## Web App Manifest – A JSON file (manifest.json) that defines:
 
 App name, icons, theme color
 
@@ -251,7 +252,6 @@ HTTPS – Mandatory for service worker security
 | Fast loading         | Pre-cached and lightweight   |
 | Re-engagement        | Push notifications supported |
 | Low storage usage    | Smaller than native apps     |
-
 
 
 | Feature                    | **JavaScript (JS)**                | **TypeScript (TS)**         
@@ -303,7 +303,7 @@ All scripts, styles, and data are reloaded on every navigation.
 MPAs are SEO-friendly, easier to manage access controls, and have faster initial loads due to page-specific resources.
 SPA uses client-side routers like react-router, while MPA uses server-side routing — the server decides which HTML to serve based on the path.
 
-What problems arise when using SPAs for large apps?
+### What problems arise when using SPAs for large apps?
 
 SEO limitations
 Initial JS bundle size

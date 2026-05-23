@@ -1,3 +1,5 @@
+# webpack
+
 🔁 Webpack Lifecycle Overview
 
 Initialization → Compilation → Build Modules → Seal → Emit
@@ -42,7 +44,6 @@ Writes them to output.path
 Triggers compiler.hooks.done after writing
 
 
-
 🔌 Related Hooks (used in plugins)
 
 | Hook Name                       | Lifecycle Phase             |
@@ -62,4 +63,3 @@ Triggers compiler.hooks.done after writing
 | Build Modules  | Transform files using loaders    |
 | Seal           | Optimize and finalize build      |
 | Emit           | Write output files to disk       |
-

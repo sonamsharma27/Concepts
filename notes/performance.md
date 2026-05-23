@@ -1,14 +1,19 @@
+# performance
+
 Image Performance
 
 srcset
 The <img> element supports the srcset attribute, which lets you specify a list of possible image sources the browser may use. Each image source specified must include the image URL, and a width or pixel density descriptor.
 
+```html
 <img
   alt="An image"
   width="500"
   height="500"
   src="/image-500.jpg"
   srcset="/image-500.jpg 1x, /image-1000.jpg 2x, /image-1500.jpg 3x"
+```
+
 >
 
 The preceding HTML snippet uses the pixel density descriptor to hint the browser to use image-500.png on devices with a DPR of 1, image-1000.jpg on devices with a DPR of 2, and image-1500.jpg on devices with a DPR of 3.
@@ -21,6 +26,7 @@ The previous solution only works if you display the image at the same CSS pixel 
 
 The sizes attribute lets you specify a set of source sizes, where each source size consists of a media condition and a value. The sizes attribute describes the intended display size of the image in CSS pixels. When combined with the srcset width descriptors, the browser can choose which image source is best for the user's device.
 
+```html
 <img
   alt="An image"
   width="500"
@@ -28,6 +34,8 @@ The sizes attribute lets you specify a set of source sizes, where each source si
   src="/image-500.jpg"
   srcset="/image-500.jpg 500w, /image-1000.jpg 1000w, /image-1500.jpg 1500w"
   sizes="(min-width: 768px) 500px, 100vw"
+```
+
 >
 
 File formats
@@ -38,9 +46,10 @@ WebP is a widely supported format that works on all modern browsers. WebP often 
 AVIF is a newer image format, and while it isn't as widely supported as WebP, it does enjoy reasonably decent support across browsers. AVIF supports both lossy and lossless compression, and tests have shown greater than 50% savings when compared to JPEG in some cases. AVIF also offers Wide Color Gamut (WCG) and High Dynamic Range (HDR) features.
 
 
-The <picture> element gives you greater flexibility in specifying multiple image candidates:
+## The <picture> element gives you greater flexibility in specifying multiple image candidates:
 
 
+```html
 <picture>
   <source type="image/avif" srcset="image.avif">
   <source type="image/webp" srcset="image.webp">
@@ -51,6 +60,7 @@ The <picture> element gives you greater flexibility in specifying multiple image
     src="/image.jpg"
   >
 </picture>
+```
 
 
 When you use <source> element(s) within the <picture> element, you can add support for AVIF and WebP images, but fall back to more compatible legacy image formats if the browser does not support modern formats. With this approach, the browser picks the first <source> element specified that matches. If it can render the image in that format, it uses that image. Otherwise, the browser moves on to the next specified <source> element. In the preceding HTML snippet, the AVIF format takes priority over the WebP format, falling back to the JPEG format if neither AVIF or WebP is supported.
@@ -64,6 +74,6 @@ Lazy loading
 It's possible to tell the browser to lazy load images when they appear in the viewport using the loading attribute. An attribute value of lazy tells the browser to not download the image until it is in (or near) the viewport. This saves bandwidth, allowing the browser to prioritize the resources it needs to render the critical content that is already in the viewport.
 
 
-👉 In performance tuning:
+## 👉 In performance tuning:
 Prefer animations that only affect composite layers (transform, opacity).
 Avoid frequent paint-heavy changes (like box-shadow, border-radius, background-color) in animations.

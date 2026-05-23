@@ -1,3 +1,5 @@
+# CP Patterns
+
 DS / CP Patterns
 Prefix, suffix array
 Left and right contributions for each element of the array

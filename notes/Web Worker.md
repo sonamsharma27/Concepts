@@ -1,3 +1,5 @@
+# Web Worker
+
 🔹 1. The Problem They Solve
 
 JS in browsers is single-threaded (event loop model).
@@ -14,19 +16,21 @@ Instead, it has its own event loop just like the main thread, but isolated.
 (b) Message Passing (PostMessage API)
 Communication happens via the structured clone algorithm (deep copy of objects without references).
 
-Example:
+## Example:
+```js
 worker.postMessage({ a: 1 });
 worker.onmessage = (e) => console.log(e.data);
+```
 
 
-Under the hood:
+## Under the hood:
 Browser serializes the object (structured clone).
 Sends it through an internal channel (like an OS-level message queue or thread-safe queue).
 Worker thread deserializes it and enqueues in its own event loop.
 For large data, browsers use Transferable Objects (like ArrayBuffer) → memory is moved, not copied.
 
 (c) Execution Model
-Each worker runs its own event loop:
+## Each worker runs its own event loop:
 Wait for messages from main thread.
 Process events (timers, fetch, computations).
 Send results back with postMessage.
@@ -43,7 +47,7 @@ Scheduling is handled by the OS kernel’s thread scheduler.
 Workers communicate through internal event queues, not shared call stacks.
 
 🔹 4. Simplified Analogy
-Think of it like:
+## Think of it like:
 Main Thread → Project Manager (handles UI + delegations).
 Web Worker → Worker in another office.
 Communication → Email system (messages copied or transferred).

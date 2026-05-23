@@ -1,16 +1,23 @@
+# optimizations
+
 Caching HTML responses
 Minifying CSS / JS
 Remove unused CSS
 
 Avoid CSS @import declarations
+```js
 /* Don't do this: */
 @import url('style.css');
+```
 
 Similarly to how the <link> element works in HTML, the @import declaration in CSS lets you import an external CSS resource from within a style sheet. The major difference between these two approaches is that the HTML <link> element is part of the HTML response, and therefore discovered much sooner than a CSS file downloaded by an @import declaration.
 The reason for this is that in order for an @import declaration to be discovered, the CSS file that contains it must first be downloaded. This results in what is known as a request chain which—in the case of CSS—delays how long it takes for a page to initially render. Another drawback is that style sheets loaded using an @import declaration can't be discovered by the preload scanner, and therefore become late-discovered render-blocking resources.
 
 <!-- Do this instead: -->
+```html
 <link rel="stylesheet" href="style.css">
+```
+
 In most cases, you can replace the @import by using a <link rel="stylesheet"> element. <link> elements allow style sheets to be downloaded concurrently and reduces overall load time, as opposed to @import declarations, which downloads style sheets consecutively.
 
 Code splitting
@@ -38,11 +45,13 @@ Note that deferred scripts are executed in the order in which the appear in the 
 module
 Modern browsers also support type="module" which allows you to serve ES6 modules in the browser. Modules are deferred by default and behave similarly to defer. This makes them non render-blocking.
 
-Resoruce hints:
+## Resoruce hints:
 
-The preconnect hint is used to establish a connection to another origin from where you are fetching critical resources. For example, you may be hosting your images or assets on a CDN or other cross-origin:
+## The preconnect hint is used to establish a connection to another origin from where you are fetching critical resources. For example, you may be hosting your images or assets on a CDN or other cross-origin:
 
+```html
 <link rel="preconnect" href="https://example.com">
+```
 
 By using preconnect, you anticipate that the browser plans to connect to a specific cross-origin server in the very near future, and that the browser should open that connection as soon as possible, ideally before waiting for the HTML parser or preload scanner to do so
 
@@ -52,15 +61,21 @@ While opening connections to cross-origin servers early can significantly improv
 Per its name, dns-prefetch doesn't establish a connection to a cross-origin server, but rather just performs the DNS lookup for it ahead of time. A DNS lookup occurs when a domain name is resolved to its underlying IP address. While layers of DNS caches at the device and network levels help to make this a generally fast process, it still takes some amount of time.
 
 preload
-The preload directive is used to initiate an early request for a resource required for rendering the page:
+## The preload directive is used to initiate an early request for a resource required for rendering the page:
 
+```html
 <link rel="preload" href="/lcp-image.jpg" as="image">
+```
+
 preload directives should be limited to late-discovered critical resources. The most common use cases are font files, CSS files fetched through @import declarations, or CSS background-image resources that are likely to be Largest Contentful Paint (LCP) candidates. In such cases, these files wouldn't be discovered by the preload scanner as the resource is referenced in external resources.
 
 
-The prefetch directive is used to initiate a low priority request for a resource likely to be used for future navigations:
+## The prefetch directive is used to initiate a low priority request for a resource likely to be used for future navigations:
 
+```html
 <link rel="prefetch" href="/next-page.css" as="style">
+```
+
 This directive largely follows the same format as the preload directive, only the <link> element's rel attribute uses a value of "prefetch" instead. Unlike the preload directive, however, prefetch is largely speculative in that you're initiating a fetch for a resource for a future navigation that may or may not happen.
 
 There are times when prefetch can be beneficial—for example, if you've identified a user flow on your website that most users follow to completion, a prefetch for a render-critical resource for those future pages can help to reduce load times for them.
@@ -70,6 +85,7 @@ Fetch Priority API
 You can use the Fetch Priority API through its fetchpriority attribute to increase the priority of a resource. You can use the attribute with <link>, <img>, and <script> elements.
 
 
+```html
 <div class="gallery">
   <div class="poster">
     <img src="img/poster-1.jpg" fetchpriority="high">
@@ -80,3 +96,4 @@ You can use the Fetch Priority API through its fetchpriority attribute to increa
     <img src="img/thumbnail-4.jpg" fetchpriority="low">
   </div>
 </div>
+```

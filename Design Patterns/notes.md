@@ -1,7 +1,9 @@
+# notes
+
 Design patterns tell us how to structure classes and objects to solve certain problems 
 
 
-Strategy Pattern:
+## Strategy Pattern:
 The Strategy Pattern defines a family of algorithms, encapsulates each one, and makes them interchangeable. 
 Strategy pattern lets the algorithm vary independently from clients that use it.
 
@@ -11,7 +13,10 @@ them from what stays the same.
 1.2 The result? Fewer unintended consequences from code changes and more flexibility in your systems!
 1.3 Separating what changes from what stays the same
 
+```js
 2. Program to an interface, not an implementation. => allows setting behaviour dynamically
+```
+
 If your code is written to an interface, then it will work with any new classes implementing 
 that interface through polymorphism
 3. Favor composition over inheritance
@@ -24,7 +29,7 @@ Observer Pattern = Publishers + Subscribers
 If you understand newspaper subscriptions, you pretty much understand the Observer Pattern, only we call 
 the publisher the SUBJECT and the subscribers the OBSERVERS.
 
-Definition:
+## Definition:
 The Observer Pattern defines a one-to-many dependency between objects so that when one object changes state, 
 all of its dependents are notified and updated automatically.
 
@@ -62,11 +67,11 @@ You can push or pull data from the Observable when using the pattern (pull is co
 Design Principle: Classes should be open for extension, but closed for modification.
 
 
- Decorator Pattern:
+## Decorator Pattern:
  Definition: The Decorator Pattern attaches additional responsibilities to an object dynamically. 
  Decorators provide a flexible alternative to subclassing for extending functionality.
 
- Factory pattern:
+## Factory pattern:
  A factory method handles object creation and encapsulates it in a subclass. This decouples the 
  client code in the superclass from the object creation code in the subclass.
  All factory patterns encapsulate object creation. The Factory Method Pattern encapsulates object 
@@ -78,7 +83,7 @@ Design Principle: Classes should be open for extension, but closed for modificat
  Abstract Creator gives you an interface with a method for creating objects, also known as the
 “factory method.”
 
-The following guidelines can help you avoid OO designs that violate the Dependency Inversion Principle:
+## The following guidelines can help you avoid OO designs that violate the Dependency Inversion Principle:
 � No variable should hold a reference to a concrete class.
 � No class should derive from a concrete class.
 � No method should override an implemented method of any of its base classes.

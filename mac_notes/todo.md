@@ -1,4 +1,6 @@
-Todo:
+# todo
+
+## Todo:
 Prepare backend skills written in resume
 electron
 capacitor
@@ -16,7 +18,7 @@ how submissions are stored in leetcode/gfg
 I added a mobile number in my mobile device, when i opened whatsapp in mac browset, it had that contact. how?
 QR based login, message stored?
 
-System design:
+## System design:
 google docs
 google calendar
 
@@ -37,8 +39,7 @@ flight path question
 Word-Guess (Wordle-like) game UI
 
 
-
-How do you debug when a feature works on one browser but fails on another?
+### How do you debug when a feature works on one browser but fails on another?
 https://www.youtube.com/watch?v=XU6O4ASQoWs
 
 Follow-up: useEffect hook inside a dynamic form caused stale validation values, how do you fix this?
@@ -46,7 +47,7 @@ DOM contains(parent, child) polyfill
 
 Important polyfills: https://topmate.io/arunm/787157 
 
-Todo:
+## Todo:
 Advanced polyfills
 DSA -> Cache, Graph cycle detection
 Notes
@@ -59,30 +60,31 @@ Know about Tekion
 Twilio
 Candidates report questions like “Design a world map app that adds pins in real time as users sign up”reddit.com. Backend-style design questions are also possible. For example, a backend SDE candidate outlined questions like “Design a multi-tenant messaging platform (Twilio-like SMS/MMS service)” or “Design a scalable call-routing system”codinginterview.comcodinginterview.com, which indicate the level of thinking expected (even if a FE role might focus more on client-side aspects).
 
-Hiring manager:
+## Hiring manager:
 
+```js
 //entire funnel flow / redbus flow
 //current project -> responsive design,  tech -> rtk query, hld , lld
 //my role & resp in project , seat layout till payment
 //technical design of project
 //ejs template engine
 //solid principles
+```
 
 
+### How would you organize a large React app?
 
-How would you organize a large React app?
-
-How do you design for reusability & separation of concerns?
+### How do you design for reusability & separation of concerns?
 
 Explain feature-based architecture
 
-How do you handle API errors globally?
+### How do you handle API errors globally?
 
-How would you build a seat layout or offer module?
+### How would you build a seat layout or offer module?
 
-How would you cache co-traveller data across sessions?
+### How would you cache co-traveller data across sessions?
 
-How to optimize frontend for a high-traffic page?
+### How to optimize frontend for a high-traffic page?
 
 When to use interfaces vs types
 
@@ -111,7 +113,6 @@ Q9: "Let’s say the seat layout page has multiple API calls. How would you mana
 “Let’s say your seat layout page was lagging due to large DOM size. What steps would you take to identify and fix performance bottlenecks?”
 
 (Expect: DevTools, react-window, avoiding re-renders, profiling, etc.)
-
 
 
 “How would you structure your React app if multiple teams were working on the same frontend? How do you ensure modularity and scalability?”
@@ -148,7 +149,7 @@ Redux Toolkit: createSlice, createAsyncThunk, middleware
 6. Design an authentication & authorization system for a multi-role web application.
 7. Can you explain the different types of lifecycle methods in React, and also elaborate on what dynamic routing is and how it's implemented?
 8. Difference between class and functional components in React.
-9. Sort this array naturally:
+## 9. Sort this array naturally:
  ['A1', 'A10', 'A11', 'A12', 'A2', 'A3', 'A4', 'B10', 'B2', 'F1', 'F12', 'F3']
  Expected output: ['A1', 'A2', 'A3', 'A4', 'A10', ...]
 10. What is a custom hook in React? Use case and syntax?
@@ -159,9 +160,6 @@ Redux Toolkit: createSlice, createAsyncThunk, middleware
 15. What is a serverless application and when would you use it?
 
 
-
-
-
 Mentioned in Resume	Likely Follow-up Question
 seat layout for WhatsApp funnel	How did you handle responsiveness and performance?
 Web Workers	What problem did they solve? How were they set up?
@@ -170,16 +168,13 @@ Redux Toolkit	How do slices & async thunks work together?
 Offer module
 
 
-
-How did you make it config-driven?
-
-
+### How did you make it config-driven?
 
 
 build min and max heap , heap sort 
 last parent node is at idx -> n/2
 Linked list / binary tree from scratch
-ques:
+## ques:
 
 React element > react component
 cycle detection
@@ -218,9 +213,10 @@ Design Patterns
 ques on this keyword
 container queries
 make a lazy loading  reusable comp
+```js
 function to measure performance of a sync/async function
+```
 
 -Build a registration form using React
 -Set up an Express server
 -Send and process the form data on the backend
-

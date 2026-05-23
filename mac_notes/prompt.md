@@ -1,0 +1,4 @@
+# prompt
+
+## Prompt Template :
+Generate a report on interview experiences and questions for the Software Engineer Frontend at Tekion, using web search and analysis of platforms like LeetCode Discuss, Glassdoor, Reddit, Medium, Indeed, LinkedIn, GeeksforGeeks, X, other public career forums or blogs, etc. Include: - Brief overview of Tekion and Software Engineer Frontend. - Typical interview process (rounds, types, duration). - At least 7[Can be Tweaked] unique firsthand candidate experiences (stages, details, advice). - Categorized list of at least 30[Can be Tweaked] unique interview questions (technical, behavioral, etc.). - Insights and preparation tips, including strategies to maximize chances of getting interview calls. If data for Software Engineer Frontend is limited, use similar roles and note the extrapolation. Ensure the report is thorough, well-organized, and practical for interview preparation.
