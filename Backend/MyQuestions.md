@@ -295,3 +295,45 @@ Random UUIDs hurt much less in LSM-based systems.
 # Strong Interview Summary
 
 Random UUID primary keys degrade B+Tree performance because inserts occur across arbitrary leaf pages instead of append-only tail pages. This causes page splits, fragmentation, cache misses, additional WAL generation, and poorer buffer pool efficiency. Time-ordered identifiers preserve insertion locality and significantly improve write throughput and index maintenance efficiency.
+
+
+--------------------------------------------------
+
+A database is the complete data management system providing query execution, transactions, replication, networking, and persistence. A storage engine is the low-level subsystem responsible for physical data storage, indexing, caching, WAL logging, and recovery. In distributed systems, a node is a running database server instance participating in the cluster; each node typically contains networking, replication, coordination logic, and an embedded storage engine.
+
+Distributed Database System
+    ├── Node (server instance)
+    │      ├── Networking
+    │      ├── Replication
+    │      ├── Query handling
+    │      └── Storage Engine
+    │             ├── WAL
+    │             ├── Indexes
+    │             ├── Cache
+    │             └── Disk pages
+    └── Node
+
+
+    Database Server Process
+    ├── SQL Parser
+    ├── Query Planner
+    ├── Transaction Manager
+    ├── Replication Module
+    ├── WAL Manager
+    ├── Network Layer
+    ├── Consensus Module
+    └── Storage Engine
+
+
+
+    Replication, failover, consistency, WAL shipping, and leader election logic are implemented inside the distributed database server software itself. Each database node runs a server process containing modules such as the replication manager, consensus engine, WAL subsystem, networking layer, transaction manager, and storage engine. These components are implemented by database engineers in the database source code and operate transparently beneath the SQL/query layer exposed to applications.
+
+
+--------------------------------------------------
+
+
+Q. How sloppy quorum is different from strict quorum consensus?
+    In strict quorum consensus, reads and writes must be acknowledged by the designated replica set, and guarantees like R + W > N ensure overlapping quorums and stronger consistency. In sloppy quorum, the system relaxes replica placement during failures and allows writes to be stored on temporary fallback nodes outside the canonical replica set. This improves availability and partition tolerance but weakens strict quorum overlap guarantees, leading to eventual consistency semantics. Mechanisms like hinted handoff are later used to synchronize data back to intended replicas.
+
+
+    The condition R + W > N guarantees that every read quorum overlaps with every successful write quorum, meaning at least one replica participating in the read has seen the latest committed write. However, this alone does not guarantee strict linearizable consistency during concurrent read-write races. If a read reaches the overlapping replica before the write is applied there, stale data can still be returned. Strong consistency requires additional guarantees such as ordered commit semantics, synchronous quorum acknowledgments, controlled read/write coordination, and often consensus protocols like Raft or Paxos to enforce real-time operation ordering.
