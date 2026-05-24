@@ -1,4 +1,4 @@
-How serving videos or content is faster from CDN that high capacity servers?
+# How serving videos or content is faster from CDN that high capacity servers?
 
 CDNs improve performance mainly by reducing network distance and serving cached content from edge locations close to users. Even a very powerful origin server cannot overcome transcontinental latency, routing hops, and congestion. CDNs also optimize delivery using edge caching, persistent TCP connections, TLS offloading, anycast routing, and adaptive streaming, which significantly reduces latency and improves throughput for static assets and videos.
 
@@ -104,7 +104,7 @@ Common CDN Challenges
 - Cost management
 
 
-Q. How Kafka is so fast ?
+# Q. How Kafka is so fast ?
 1. Zero copy technique
     - Reads without zero copy : Disc -> OS buffer -> Kafka Application buffer -> Socket buffer -> NIC buffer -> Consumer
     - Reads with zero copy : Disc -> OS buffer -> NIC buffer -> Consumer
@@ -332,8 +332,33 @@ Distributed Database System
 --------------------------------------------------
 
 
-Q. How sloppy quorum is different from strict quorum consensus?
+# How sloppy quorum is different from strict quorum consensus?
     In strict quorum consensus, reads and writes must be acknowledged by the designated replica set, and guarantees like R + W > N ensure overlapping quorums and stronger consistency. In sloppy quorum, the system relaxes replica placement during failures and allows writes to be stored on temporary fallback nodes outside the canonical replica set. This improves availability and partition tolerance but weakens strict quorum overlap guarantees, leading to eventual consistency semantics. Mechanisms like hinted handoff are later used to synchronize data back to intended replicas.
 
 
     The condition R + W > N guarantees that every read quorum overlaps with every successful write quorum, meaning at least one replica participating in the read has seen the latest committed write. However, this alone does not guarantee strict linearizable consistency during concurrent read-write races. If a read reaches the overlapping replica before the write is applied there, stale data can still be returned. Strong consistency requires additional guarantees such as ordered commit semantics, synchronous quorum acknowledgments, controlled read/write coordination, and often consensus protocols like Raft or Paxos to enforce real-time operation ordering.
+
+# How data sync happens between master and slave DBs?
+1. Execute query
+2. Modify memory pages
+3. Write WAL/binlog
+4. Commit transaction
+5. Notify replication thread
+6. Replication thread streams logs to replicas
+
+This logic is written inside database engine
+
+Database Engine
+ ├── Query Executor
+ ├── Storage Engine
+ ├── Transaction Manager
+ ├── WAL/Binlog Writer
+ ├── Replication Sender
+ └── Replication Receiver
+
+ Modern DBs stream changes nearly in real time.
+
+Replication is fundamentally:
+1. Write-ahead logging
+2. Streaming ordered logs
+3. Replay on replicas
