@@ -299,9 +299,11 @@ Random UUID primary keys degrade B+Tree performance because inserts occur across
 
 --------------------------------------------------
 
-A database is the complete data management system providing query execution, transactions, replication, networking, and persistence. A storage engine is the low-level subsystem responsible for physical data storage, indexing, caching, WAL logging, and recovery. In distributed systems, a node is a running database server instance participating in the cluster; each node typically contains networking, replication, coordination logic, and an embedded storage engine.
+- A database is the complete data management system providing query execution, transactions, replication, networking, and persistence. 
+- A storage engine is the low-level subsystem responsible for physical data storage, indexing, caching, WAL logging, and recovery. 
+- In distributed systems, a node is a running database server instance participating in the cluster; each node typically contains networking, replication, coordination logic, and an embedded storage engine.
 
-Distributed Database System
+# Distributed Database System
     ├── Node (server instance)
     │      ├── Networking
     │      ├── Replication
@@ -314,7 +316,7 @@ Distributed Database System
     └── Node
 
 
-    Database Server Process
+ #  Database Server Process
     ├── SQL Parser
     ├── Query Planner
     ├── Transaction Manager
@@ -326,7 +328,9 @@ Distributed Database System
 
 
 
-    Replication, failover, consistency, WAL shipping, and leader election logic are implemented inside the distributed database server software itself. Each database node runs a server process containing modules such as the replication manager, consensus engine, WAL subsystem, networking layer, transaction manager, and storage engine. These components are implemented by database engineers in the database source code and operate transparently beneath the SQL/query layer exposed to applications.
+-  Replication, failover, consistency, WAL shipping, and leader election logic are implemented      inside the distributed database server software itself. 
+- Each database node runs a server process containing modules such as the replication manager, consensus engine, WAL subsystem, networking layer, transaction manager, and storage engine. 
+- These components are implemented by database engineers in the database source code and operate transparently beneath the SQL/query layer exposed to applications.
 
 
 --------------------------------------------------
