@@ -4,9 +4,9 @@
 
 Without TLS:
 
-```text
+
 Browser ---------------- Server
-```
+
 
 Data travels in plaintext.
 
@@ -30,9 +30,9 @@ Only sender and receiver can read the data.
 
 Example:
 
-```text
+
 Transfer ₹10000
-```
+
 
 becomes encrypted ciphertext.
 
@@ -46,15 +46,15 @@ Ensures data was not modified during transit.
 
 Example:
 
-```text
+
 Transfer ₹10000
-```
+
 
 cannot be changed to:
 
-```text
+
 Transfer ₹100000
-```
+
 
 without detection.
 
@@ -66,9 +66,9 @@ Achieved using MACs and authenticated encryption.
 
 How does browser know:
 
-```text
+
 amazon.com
-```
+
 
 is actually Amazon?
 
@@ -80,16 +80,16 @@ TLS certificates prove server identity.
 
 Same key used for:
 
-```text
+
 Encrypt
 Decrypt
-```
+
 
 Example:
 
-```text
+
 Key = ABC123
-```
+
 
 Algorithms:
 
@@ -111,10 +111,10 @@ How do both sides securely obtain the same key?
 
 Uses:
 
-```text
+
 Public Key
 Private Key
-```
+
 
 Properties:
 
@@ -123,10 +123,10 @@ Properties:
 
 Example:
 
-```text
+
 Encrypt(PublicKey)
 Decrypt(PrivateKey)
-```
+
 
 Advantages:
 
@@ -145,9 +145,9 @@ TLS combines both approaches.
 
 Handshake:
 
-```text
+
 Asymmetric Cryptography
-```
+
 
 used for:
 
@@ -156,9 +156,9 @@ used for:
 
 Communication:
 
-```text
+
 Symmetric Cryptography
-```
+
 
 used for:
 
@@ -178,29 +178,29 @@ Symmetric encryption is much faster.
 
 SSL (deprecated):
 
-```text
+
 SSL 1.0
 SSL 2.0
 SSL 3.0
-```
+
 
 Broken and insecure.
 
 TLS (modern):
 
-```text
+
 TLS 1.0
 TLS 1.1
 TLS 1.2
 TLS 1.3
-```
+
 
 Today:
 
-```text
+
 TLS 1.2
 TLS 1.3
-```
+
 
 are used.
 
@@ -208,15 +208,15 @@ Important:
 
 People still say:
 
-```text
+
 SSL Certificate
-```
+
 
 but almost always mean:
 
-```text
+
 TLS Certificate
-```
+
 
 ---
 
@@ -226,23 +226,23 @@ HTTPS = HTTP + TLS
 
 HTTP:
 
-```http
+http
 GET /balance
-```
+
 
 travels in plaintext.
 
 HTTPS:
 
-```text
+
 Encrypted TLS Tunnel
-```
+
 
 contains:
 
-```http
+http
 GET /balance
-```
+
 
 which cannot be read by intermediaries.
 
@@ -260,19 +260,19 @@ Securely establish a shared session key.
 
 Browser sends:
 
-```text
+
 Supported TLS Versions
 Supported Cipher Suites
 Client Random
-```
+
 
 Example:
 
-```text
+
 TLS 1.3
 AES256
 ChaCha20
-```
+
 
 ---
 
@@ -280,12 +280,12 @@ ChaCha20
 
 Server sends:
 
-```text
+
 Selected TLS Version
 Selected Cipher Suite
 Server Random
 Certificate
-```
+
 
 ---
 
@@ -295,10 +295,10 @@ Browser validates:
 
 ### Domain Match
 
-```text
+
 Certificate: amazon.com
 Visited: amazon.com
-```
+
 
 Must match.
 
@@ -312,9 +312,9 @@ Certificate must be signed by trusted CA.
 
 If verification fails:
 
-```text
+
 NET::ERR_CERT_AUTHORITY_INVALID
-```
+
 
 ---
 
@@ -324,17 +324,17 @@ Browser and server derive a shared session key.
 
 Modern TLS uses:
 
-```text
+
 ECDHE
-```
+
 
 instead of directly exchanging keys.
 
 Result:
 
-```text
+
 Shared Session Key
-```
+
 
 known only to browser and server.
 
@@ -344,11 +344,11 @@ known only to browser and server.
 
 All future traffic uses:
 
-```text
+
 AES
 or
 ChaCha20
-```
+
 
 with the session key.
 
@@ -368,19 +368,19 @@ Browsers trust these CAs.
 
 Certificate contains:
 
-```text
+
 Domain Name
 Public Key
 Issuer
 Expiry Date
 Digital Signature
-```
+
 
 Think of a certificate as:
 
-```text
+
 Passport for a website
-```
+
 
 ---
 
@@ -388,9 +388,9 @@ Passport for a website
 
 Modern TLS uses:
 
-```text
+
 ECDHE
-```
+
 
 to generate temporary session keys.
 
@@ -398,17 +398,17 @@ Benefit:
 
 Even if server private key is leaked later:
 
-```text
+
 Old TLS Sessions
-```
+
 
 cannot be decrypted.
 
 This is called:
 
-```text
+
 Perfect Forward Secrecy
-```
+
 
 ---
 
@@ -418,12 +418,12 @@ Perfect Forward Secrecy
 
 Multiple round trips:
 
-```text
+
 Client Hello
 Server Hello
 Certificate
 Key Exchange
-```
+
 
 Higher latency.
 
@@ -440,9 +440,9 @@ Advantages:
 
 Connection setup:
 
-```text
+
 1 RTT
-```
+
 
 instead of multiple.
 
@@ -461,22 +461,22 @@ Encrypted:
 
 Example:
 
-```text
+
 https://amazon.com/orders
-```
+
 
 Encrypted:
 
-```text
+
 /orders
-```
+
 
 Not encrypted:
 
-```text
+
 IP Address
 Port
-```
+
 
 Network still knows where you connected.
 
@@ -486,7 +486,7 @@ Network still knows where you connected.
 
 Typical production architecture:
 
-```text
+
 Browser
     |
  HTTPS
@@ -496,13 +496,13 @@ Load Balancer
  HTTP
     |
 Backend
-```
+
 
 Load balancer performs:
 
-```text
+
 TLS Termination
-```
+
 
 Meaning:
 
@@ -520,7 +520,7 @@ Benefits:
 
 More secure architecture:
 
-```text
+
 Browser
    |
  HTTPS
@@ -534,7 +534,7 @@ Service A
  HTTPS
    |
 Service B
-```
+
 
 Benefits:
 
@@ -549,9 +549,9 @@ Benefits:
 
 Users see:
 
-```text
+
 Connection Not Secure
-```
+
 
 ---
 
@@ -559,15 +559,15 @@ Connection Not Secure
 
 Certificate:
 
-```text
+
 api.company.com
-```
+
 
 Request:
 
-```text
+
 payments.company.com
-```
+
 
 Validation fails.
 
@@ -587,12 +587,12 @@ Can add noticeable delay.
 
 Request timeline:
 
-```text
+
 DNS
 TCP
 TLS
 TTFB
-```
+
 
 ---
 
@@ -600,15 +600,15 @@ TTFB
 
 Client:
 
-```text
+
 TLS 1.3
-```
+
 
 Server:
 
-```text
+
 TLS 1.0
-```
+
 
 Handshake fails.
 
@@ -644,17 +644,17 @@ Symmetric encryption requires both parties to know the same secret key.
 
 Problem:
 
-```text
+
 Client -------- Internet -------- Server
-```
+
 
 How do we securely share that key?
 
 If the key is sent over the network:
 
-```text
+
 Attacker can intercept it
-```
+
 
 Asymmetric cryptography solves this problem.
 
@@ -664,14 +664,14 @@ Asymmetric cryptography solves this problem.
 
 Every server generates:
 
-```text
+
 Public Key
 Private Key
-```
+
 
 Properties:
 
-```text
+
 Encrypt(Public Key)
 ↓
 Decrypt(Private Key)
@@ -679,19 +679,19 @@ Decrypt(Private Key)
 Sign(Private Key)
 ↓
 Verify(Public Key)
-```
+
 
 Public Key:
 
-```text
+
 Can be shared with everyone
-```
+
 
 Private Key:
 
-```text
+
 Must remain secret
-```
+
 
 ---
 
@@ -699,42 +699,42 @@ Must remain secret
 
 Server owns:
 
-```text
+
 Public Key  = P
 Private Key = S
-```
+
 
 Browser wants to send:
 
-```text
+
 Hello
-```
+
 
 Browser encrypts:
 
-```text
+
 Encrypt("Hello", P)
-```
+
 
 Produces:
 
-```text
+
 X7A9KJ1...
-```
+
 
 Ciphertext travels over the network.
 
 Only server can decrypt:
 
-```text
+
 Decrypt(X7A9KJ1..., S)
-```
+
 
 Result:
 
-```text
+
 Hello
-```
+
 
 ---
 
@@ -749,39 +749,39 @@ are based on mathematical problems that are easy in one direction and extremely 
 
 RSA Example:
 
-```text
+
 Public Key:
 (n,e)
 
 Private Key:
 (n,d)
-```
+
 
 Anyone can encrypt using:
 
-```text
+
 (n,e)
-```
+
 
 Only holder of:
 
-```text
+
 d
-```
+
 
 can decrypt.
 
 Finding:
 
-```text
+
 d
-```
+
 
 from:
 
-```text
+
 (n,e)
-```
+
 
 requires factoring extremely large numbers, which is computationally infeasible.
 
@@ -793,14 +793,14 @@ Asymmetric encryption is expensive.
 
 Performance comparison:
 
-```text
+
 AES Encryption
 ≈ Thousands of times faster than RSA
-```
+
 
 Therefore:
 
-```text
+
 Asymmetric Crypto
 ↓
 Used only during handshake
@@ -808,7 +808,7 @@ Used only during handshake
 Symmetric Crypto
 ↓
 Used for actual communication
-```
+
 
 ---
 
@@ -818,35 +818,35 @@ Used for actual communication
 
 Browser generates:
 
-```text
+
 SessionKey = ABC123
-```
+
 
 Browser encrypts:
 
-```text
+
 Encrypt(ABC123, ServerPublicKey)
-```
+
 
 Sends encrypted session key to server.
 
 Server decrypts:
 
-```text
+
 Decrypt(EncryptedSessionKey, ServerPrivateKey)
-```
+
 
 Now both know:
 
-```text
+
 ABC123
-```
+
 
 Actual traffic uses:
 
-```text
+
 AES(ABC123)
-```
+
 
 ---
 
@@ -854,16 +854,16 @@ AES(ABC123)
 
 Suppose attacker records all traffic today:
 
-```text
+
 Encrypted Session Key
 Encrypted HTTPS Traffic
-```
+
 
 Years later:
 
-```text
+
 Server Private Key Leaks
-```
+
 
 Attacker can now:
 
@@ -871,29 +871,29 @@ Attacker can now:
 
 Recover session key:
 
-```text
+
 Decrypt(EncryptedSessionKey, ServerPrivateKey)
-```
+
 
 Gets:
 
-```text
+
 ABC123
-```
+
 
 ### Step 2
 
 Decrypt old traffic:
 
-```text
+
 AES Decrypt(Recorded Traffic)
-```
+
 
 Result:
 
-```text
+
 All historical traffic exposed
-```
+
 
 This is the major weakness of old TLS.
 
@@ -903,10 +903,10 @@ This is the major weakness of old TLS.
 
 Goal:
 
-```text
+
 Allow two parties to derive the same secret
 without sending the secret itself.
-```
+
 
 This is the foundation of Perfect Forward Secrecy.
 
@@ -916,10 +916,10 @@ This is the foundation of Perfect Forward Secrecy.
 
 Public values:
 
-```text
+
 g = 5
 p = 23
-```
+
 
 Everyone knows these values.
 
@@ -929,27 +929,27 @@ Everyone knows these values.
 
 Chooses secret:
 
-```text
+
 a = 6
-```
+
 
 Computes:
 
-```text
+
 A = g^a mod p
-```
+
 
 Result:
 
-```text
+
 A = 8
-```
+
 
 Sends:
 
-```text
+
 A = 8
-```
+
 
 to server.
 
@@ -959,27 +959,27 @@ to server.
 
 Chooses secret:
 
-```text
+
 b = 15
-```
+
 
 Computes:
 
-```text
+
 B = g^b mod p
-```
+
 
 Result:
 
-```text
+
 B = 19
-```
+
 
 Sends:
 
-```text
+
 B = 19
-```
+
 
 to browser.
 
@@ -989,39 +989,39 @@ to browser.
 
 Browser computes:
 
-```text
+
 Shared Secret = B^a mod p
-```
+
 
 Result:
 
-```text
+
 2
-```
+
 
 Server computes:
 
-```text
+
 Shared Secret = A^b mod p
-```
+
 
 Result:
 
-```text
+
 2
-```
+
 
 Both independently derive:
 
-```text
+
 Shared Secret = 2
-```
+
 
 without ever transmitting:
 
-```text
+
 2
-```
+
 
 across the network.
 
@@ -1031,35 +1031,35 @@ across the network.
 
 Attacker sees:
 
-```text
+
 g = 5
 p = 23
 A = 8
 B = 19
-```
+
 
 Attacker never sees:
 
-```text
+
 a
 b
-```
+
 
 Without knowing:
 
-```text
+
 a
 or
 b
-```
+
 
 attacker cannot derive the shared secret.
 
 This security relies on:
 
-```text
+
 Discrete Logarithm Problem
-```
+
 
 which is computationally difficult.
 
@@ -1069,23 +1069,23 @@ which is computationally difficult.
 
 Modern TLS uses:
 
-```text
+
 ECDHE
 =
 Elliptic Curve Diffie-Hellman Ephemeral
-```
+
 
 Important word:
 
-```text
+
 Ephemeral
-```
+
 
 Meaning:
 
-```text
+
 Temporary
-```
+
 
 ---
 
@@ -1093,17 +1093,17 @@ Temporary
 
 Every new TLS connection generates:
 
-```text
+
 Temporary Diffie-Hellman Key Pair
-```
+
 
 Example:
 
-```text
+
 Connection 1 → Temporary Key Pair 1
 Connection 2 → Temporary Key Pair 2
 Connection 3 → Temporary Key Pair 3
-```
+
 
 Each connection gets a completely new secret.
 
@@ -1113,23 +1113,23 @@ Each connection gets a completely new secret.
 
 Suppose attacker records traffic today:
 
-```text
+
 Connection #1
 Connection #2
 Connection #3
-```
+
 
 Years later:
 
-```text
+
 Server Private Key Leaks
-```
+
 
 Attacker now possesses:
 
-```text
+
 Server Private Key
-```
+
 
 Question:
 
@@ -1137,9 +1137,9 @@ Can attacker decrypt old traffic?
 
 Answer:
 
-```text
+
 No
-```
+
 
 ---
 
@@ -1149,24 +1149,24 @@ Because the server private key was NOT used to generate session keys.
 
 In modern TLS:
 
-```text
+
 Server Private Key
 ↓
 Used only for authentication
-```
+
 
 The session key came from:
 
-```text
+
 Ephemeral Diffie-Hellman Exchange
-```
+
 
 The temporary secrets:
 
-```text
+
 a
 b
-```
+
 
 were:
 
@@ -1176,9 +1176,9 @@ were:
 
 Therefore attacker cannot reconstruct:
 
-```text
+
 Session Key
-```
+
 
 even after obtaining the server private key.
 
@@ -1190,23 +1190,23 @@ even after obtaining the server private key.
 
 Server proves identity:
 
-```text
+
 "I am really amazon.com"
-```
+
 
 by signing handshake data.
 
 Browser verifies signature using:
 
-```text
+
 Server Public Key
-```
+
 
 This provides:
 
-```text
+
 Authentication
-```
+
 
 ---
 
@@ -1214,15 +1214,15 @@ Authentication
 
 Session key is derived using:
 
-```text
+
 ECDHE
-```
+
 
 This provides:
 
-```text
+
 Confidentiality
-```
+
 
 ---
 
@@ -1230,11 +1230,11 @@ Confidentiality
 
 In TLS 1.3:
 
-```text
+
 Server Private Key
 ≠
 Session Key
-```
+
 
 Server private key only proves identity.
 

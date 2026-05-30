@@ -54,11 +54,11 @@ Heavy JavaScript computation runs on the browser's main thread.
 
 Example:
 
-```js
+js
 button.onclick = () => {
   for(let i=0;i<10000000000;i++) {}
 }
-```
+
 
 Symptoms:
 
@@ -104,9 +104,9 @@ Network response may arrive quickly.
 
 However browser spends time parsing:
 
-```json
+json
 100MB JSON
-```
+
 
 Symptoms:
 
@@ -319,9 +319,9 @@ Application becomes temporarily unresponsive.
 
 Example:
 
-```js
+js
 while(true){}
-```
+
 
 or expensive computation.
 
@@ -333,9 +333,9 @@ Entire Node process becomes blocked.
 
 Many requests waiting on:
 
-```java
+java
 synchronized(account)
-```
+
 
 Only one request proceeds.
 
@@ -409,11 +409,11 @@ One of the most common causes.
 
 Example:
 
-```sql
+sql
 SELECT *
 FROM orders
 WHERE email = 'abc'
-```
+
 
 No index exists.
 
@@ -437,9 +437,9 @@ Query performance degrades:
 
 Transaction A:
 
-```sql
+sql
 UPDATE users
-```
+
 
 Transaction B waits for row lock.
 
@@ -449,9 +449,9 @@ Transaction B waits for row lock.
 
 Operations like:
 
-```sql
+sql
 ALTER TABLE
-```
+
 
 can block other queries.
 
@@ -650,7 +650,7 @@ Request
 → Timeout Triggered
 → Response Returned
 
-Exact round-number delays are strong indicators of timeout configurations.
+* Exact round-number delays are strong indicators of timeout configurations.
 
 ---
 
