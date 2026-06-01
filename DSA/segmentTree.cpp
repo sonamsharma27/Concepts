@@ -19,7 +19,7 @@ void build(int idx, int low, int high, int arr[]) {
 
 // Query sum in range [l, r]
 // [low, high] is the range of the current segment of array 
-// seg[idx] is the sum of the segment of elements from index low to index high
+// seg[idx] is the sum of the segment of elements  of array from index low to index high
 int query(int idx, int low, int high, int l, int r) {
     // No overlap
     if (r < low || high < l)

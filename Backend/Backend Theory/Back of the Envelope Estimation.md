@@ -15,7 +15,16 @@ Each record contains:
 With 25% overhead for indexes(primary + secondary + internal structuring):
 - **Total Row Size: 163.75 bytes**
 
+
 ### 3. Base Database Storage
+Assume 100 million new shortened URLs per day:
+- Daily entries: 100,000,000
+- Annual entries: 36,500,000,000
+- 10-year entries: 365,000,000,000
+- Shortened URLs created per second: ~1,157
+- At 163.75 bytes per record:
+  - Daily raw storage: ~16.4 GB
+  - 10-year raw storage: ~59.77 TB
 For 365 billion records:
 - **Base Storage: ~59.77 TB**
 
