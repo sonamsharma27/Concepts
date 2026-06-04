@@ -34,6 +34,9 @@ Break the problem into small parts.
 https://leetcode.com/problems/count-submatrices-with-all-ones/description/?envType=daily-question&envId=2025-08-21
 Binary Search Pattern :  Median in a row-wise sorted Matrix : Take the entire search space and count elements smaller than or equal to for shrinking search space
 Using ordered set  : https://www.geeksforgeeks.org/problems/sum-of-mode/1 : Very important for hard level questions
+
+
+* Freq of elements in a given range:  https://www.geeksforgeeks.org/problems/count-frequency-of-an-element-in-a-given-range/1
 Bases : https://leetcode.com/problems/minimum-operations-to-make-array-elements-zero/description/
 
 DSA Core
