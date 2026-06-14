@@ -366,3 +366,22 @@ Replication is fundamentally:
 1. Write-ahead logging
 2. Streaming ordered logs
 3. Replay on replicas
+
+
+# Why serialization is needed when sending data over network ?
+- Serialization is required when sending data over a network because objects are stored as process-specific memory structures whose references are meaningless outside that process. Serialization converts the object into a platform-independent byte stream that can be transmitted and reconstructed by another process or machine. Within the same application and process, methods can directly access the object through memory references, so serialization is unnecessary.
+
+- Why not send raw memory?
+Different machines may have:
+
+Different CPU architectures
+Different endianness
+Different compiler implementations
+Different memory layouts
+
+Even if you copied raw RAM bytes:
+0xAF 0x12 0x99 ...
+
+the receiving machine may interpret them differently.
+
+Serialization provides a platform-independent representation.

@@ -2,7 +2,6 @@
 
 1. Append-Only Storage with LSM Trees , SSTables, Compaction
 
-
 2. Delta Encoding and Compression
 
     Time-series data has a unique property: adjacent values are often similar. If you're recording CPU usage every second, the values might be 45.2%, 45.3%, 45.1%, 45.4%. Storing the full value each time wastes space.
