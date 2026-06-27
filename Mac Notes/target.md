@@ -1,10 +1,17 @@
-# target
+# Target companies:
 
-## Target companies:
+# Airbnb
+# Atlassian
+# Stripe
+# Confluent
+# Postman
+# Glean
+# Databricks
+# Google
+# LinkedIn
+# Snowflake
 
-Google
 Tekion
-
 Intuit
 Harness
 Twilio
@@ -20,15 +27,9 @@ Acko
 Jio Hotstar
 
 
-Glean
-Snowflake
-Databricks
+
+
+
 New Relic
 Rippling
-Airbnb
-Atlassian
-Stripe
-confluent
-Postman
-
 Vercel

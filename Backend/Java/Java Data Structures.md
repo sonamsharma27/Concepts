@@ -116,10 +116,14 @@ Map<Integer,String> map =
 
 Sorted by key automatically.
 
+map.put(1,"A");
+map.get(1);
+map.remove(1);
+map.containsKey(1);
+
+
 Extra APIs:
-
 map.firstKey()
-
 map.lastKey()
 
 --------------------------------------------------------

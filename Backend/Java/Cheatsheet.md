@@ -23,8 +23,8 @@ priority_queue          PriorityQueue
 List<String> list = new ArrayList<>();
 
 list.add("A");
-list.get(0);
 list.remove(0);
+list.get(0);
 list.size();
 
 -----------------------------------------
@@ -96,7 +96,7 @@ q.offer(1);
 q.offer(2);
 
 q.peek();
-q.poll();
+q.poll(); // q.front() & q.pop();
 
 -----------------------------------------
 8. PRIORITY QUEUE
@@ -206,17 +206,11 @@ Common in Builder Pattern.
 14. FINAL
 -----------------------------------------
 
-final int MAX = 100;
+final int MAX = 100; -> Cannot modify.
 
-Cannot modify.
+final class A {} -> Cannot inherit.
 
-final class A {}
-
-Cannot inherit.
-
-final void show() {}
-
-Cannot override.
+final void show() {} -> Cannot override.
 
 -----------------------------------------
 15. ENUM
