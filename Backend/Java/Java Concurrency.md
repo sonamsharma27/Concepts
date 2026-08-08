@@ -644,11 +644,9 @@ class Singleton {
     getInstance() {
 
         if(instance == null) {
-
             synchronized(
                 Singleton.class
             ) {
-
                 if(instance == null) {
 
                     instance =
