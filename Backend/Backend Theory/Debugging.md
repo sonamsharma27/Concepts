@@ -62,3 +62,154 @@ jcmd
       locks                       memory leak
       thread pools
 
+
+LINUX DEBUGGING COMMAND FLAGS — QUICK REFERENCE
+
+1. lsof
+
+-i  → Internet
+      Show network-related open files/sockets
+
+-p  → Process
+      Filter by PID
+
+Examples:
+lsof -i
+→ Show network connections
+
+lsof -p 1234
+→ Show all files/resources opened by PID 1234
+
+lsof -p 1234 -i
+→ Show network connections of PID 1234
+
+
+2. ss
+
+-t  → TCP
+      Show TCP sockets
+
+-u  → UDP
+      Show UDP sockets
+
+-l  → Listening
+      Show listening sockets
+
+-p  → Process
+      Show PID/process using the socket
+
+-n  → Numeric
+      Don't resolve hostnames/service names
+      Show IPs and port numbers directly
+
+-a  → All
+      Show all sockets
+
+-s  → Summary
+      Show socket/network statistics
+
+-o  → Timer information
+      Show socket timers
+
+
+# IMPORTANT COMMANDS
+
+ss -tulpn
+
+→ Show TCP + UDP listening sockets
+  + owning process/PID
+  + numeric IPs/ports
+
+Mnemonic:
+T U L P N
+TCP UDP Listening Process Numeric
+
+
+ss -tanp
+→ Show ALL TCP connections
+  + numeric IPs/ports
+  + owning process/PID
+
+Useful for investigating:
+ESTABLISHED
+TIME-WAIT
+CLOSE-WAIT
+SYN-SENT
+LISTEN
+
+
+ss -s
+→ Show network/socket summary
+
+
+ss -to
+→ Show TCP sockets + timer information
+
+
+3. TOP DEBUGGING FLOW
+
+Problem: "Which process is using port 8080?"
+
+lsof -i :8080
+
+        ↓
+
+Get PID
+
+        ↓
+
+ps -p <PID> -o pid,ppid,%cpu,%mem,etime,cmd
+
+        ↓
+
+Check process network connections
+
+lsof -p <PID> -i
+
+        ↓
+
+Check TCP connection states
+
+ss -tanp
+
+
+4. MENTAL MODEL
+
+Machine
+   ↓
+Process
+   ↓
+File descriptors
+   ↓
+Network sockets
+   ↓
+Connection state
+   ↓
+Application
+
+ps       → What processes are running?
+lsof     → What resources/files/sockets does a process use?
+ss       → What network connections/sockets exist?
+jstack   → What are Java threads doing?
+jcmd     → What is the JVM/GC doing?
+
+
+MOST IMPORTANT TO MEMORIZE
+
+ps aux
+→ What processes are running?
+
+lsof -i :8080
+→ Who is using port 8080?
+
+lsof -p <PID>
+→ What resources does this process have open?
+
+ss -tulpn
+→ What ports are listening and which processes own them?
+
+ss -tanp
+→ What TCP connections exist and which processes own them?
+
+ss -s
+→ What's the overall network/socket state?
