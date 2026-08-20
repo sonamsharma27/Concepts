@@ -11,7 +11,7 @@
 * jstack → "What are all my threads doing right now?"
 * jstack <PID> > thread-dump.txt
 * Heap dump → "What objects are occupying my memory right now?"
-* jmap -dump:live,format=b,file=heap.hprof 12345 -> Take a snapshot of the Java heap of process 12345,      include only objects that are currently alive, store it in binary HPROF 
+* jmap -dump:live,format=b,file=heap.hprof 12345 -> Take a snapshot of the Java heap of process 12345, include only objects that are currently alive, store it in binary HPROF 
 format, and save it as heap.hprof.
 
 * jmap is primarily focused on memory/heap inspection.
@@ -213,3 +213,28 @@ ss -tanp
 
 ss -s
 → What's the overall network/socket state?
+
+ps aux --sort=-%cpu | head -> Which process is consuming  max CPU?
+
+ps aux --sort=-%mem | head -> Which process is consuming the most memory?
+
+# Note:
+netstat is deprecated in modern Linux systems, ss is used 
+
+* fuser file_name
+"Which process is currently using this file, directory, or port?"
+
+
+Must memorize:
+
+ps aux
+lsof -i :8080
+lsof -p <PID>
+ss -tulpn
+ss -tanp
+ss -s
+
+# awk
+To get the first field  of the file, you can do awk '{print $1}' access.log or using "cut" with delimiter of space (-d' ') and picking the first field (-f1): cat access.log |cut -d' ' -f1. You may want to append a pipe | head or | tail as you construct the command to see how your filters are working.
+
+awk '{print $1}' access.log|sort|uniq -c|sort -r|head -1|awk '{print $2}' > /home/admin/highestip.txt

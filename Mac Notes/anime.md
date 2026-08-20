@@ -1,9 +1,8 @@
 # anime
-
-the super cube
+the super cube -> done
 unlucky and undead
 stein’s gate
 Erased
-dandanadan
+dandanadan -> done 
 taco p original sin
 Sousou no Frieren

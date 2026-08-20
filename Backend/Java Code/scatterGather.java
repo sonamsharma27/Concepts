@@ -109,3 +109,5 @@ public class PriceAggregator {
         executor.shutdown();
     }
 }
+
+// Can also be implemented using CompletableFuture, which is more elegant and less verbose.
