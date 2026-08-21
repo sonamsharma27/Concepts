@@ -238,3 +238,44 @@ ss -s
 To get the first field  of the file, you can do awk '{print $1}' access.log or using "cut" with delimiter of space (-d' ') and picking the first field (-f1): cat access.log |cut -d' ' -f1. You may want to append a pipe | head or | tail as you construct the command to see how your filters are working.
 
 awk '{print $1}' access.log|sort|uniq -c|sort -r|head -1|awk '{print $2}' > /home/admin/highestip.txt
+
+-r is for reverse
+-c is for count
+
+# grep
+
+Find matches for the exact *word* "Donald" in a file - words that contain "Donald," like "McDonald," won't count:
+
+	grep -w "Donald" famousducks.txt
+
+Find matches for "McDuck" in every file in the current directory:
+
+	grep "McDuck" *
+
+Find matches for "McDuck" in every file in the current directory AND every subdirectory, all the way down:
+
+	grep -r "McDuck" *
+
+For each match of "Howard", print out that line AND the 4 lines after it (5 lines total):
+
+	grep -A 4 "Howard" famousducks.txt // A -> after
+
+For each match of "Howard", print out that line AND the 4 lines before it (5 lines total):
+
+	grep -B 4 "Howard" famousducks.txt // B -> Before
+
+For each match of "Howard", print out that line AND the 4 lines before it AND the 4 lines after it (9 lines total):
+
+	grep -C 4 "Howard" famousducks.txt
+
+Instead of printing out the matching lines themselves, print out the filenames that match your search:
+
+	grep -l "Daffy" * // l -> list
+
+Just get the number of matches:
+
+	grep -c "Daffy" *
+
+Show line numbers along with the matching lines:
+
+	grep -n "Daffy" famousducks.txt
