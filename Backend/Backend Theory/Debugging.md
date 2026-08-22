@@ -279,3 +279,11 @@ Just get the number of matches:
 Show line numbers along with the matching lines:
 
 	grep -n "Daffy" famousducks.txt
+
+# awk
+
+awk runs on each line for the given file/txt
+
+Eg: awk '{sum += $2; count++} END {print "Lines:", count; print "Sum:", sum; print "Average:", sum/count}' file
+
+* Note : sudo -> super user do
