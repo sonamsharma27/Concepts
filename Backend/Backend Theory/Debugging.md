@@ -287,3 +287,12 @@ awk runs on each line for the given file/txt
 Eg: awk '{sum += $2; count++} END {print "Lines:", count; print "Sum:", sum; print "Average:", sum/count}' file
 
 * Note : sudo -> super user do
+
+# df -> disk free
+ df -h is used commonly
+ 
+
+# du -> disk used
+du -sh file_path is used commonly
+-s -> summary
+-h gives usage in appropriate format
