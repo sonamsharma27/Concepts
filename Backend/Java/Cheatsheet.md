@@ -590,3 +590,9 @@ Food Delivery
 Ride Sharing
 Elevator
 and most LLD interview solutions.
+
+
+# Notes:
+* final class   → cannot extend the class
+* final method  → cannot override the method
+* final variable → cannot reassign the variable
