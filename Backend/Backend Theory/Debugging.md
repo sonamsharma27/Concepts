@@ -84,7 +84,7 @@ lsof -p 1234 -i
 → Show network connections of PID 1234
 
 
-2. ss
+2. ss (modern alternative to netstat)
 
 -t  → TCP
       Show TCP sockets
